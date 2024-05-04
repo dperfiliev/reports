@@ -7,7 +7,7 @@ export default function Header(){
             {/* LOGOHOLDER */}
             <LogoHolder />
             {/* LINE */}
-            <div className="w-full h-[0.5px] lg:h-[1px] bg-blue mx-5">
+            <div className="w-full h-[0.5px] md:h-[1px] bg-blue mx-5">
 
             </div>
             {/* NAV */}
