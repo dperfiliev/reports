@@ -10,6 +10,10 @@ const config = {
 	],
   prefix: "",
   theme: {
+    fontFamily: {
+      'upper': ["Involve-Regular", "sans-serif"], 
+      'lower': ["DejaVuSans-ExtraLight", "sans-serif"]
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -19,6 +23,7 @@ const config = {
     },
     extend: {
       colors: {
+        'blue': '#00538A',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
