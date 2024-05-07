@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function FindOut(){
     return(
-        <div className="mt-3 sm:mt-4 md:mt-6 flex items-center">
+        <div className="mt-3 sm:mt-4 md:mt-6 flex items-center cursor-pointer">
                 <span className="text-blue text-[10px] sm:text-sm">
                     Узнать больше
                 </span>

@@ -12,7 +12,7 @@ export default function Footer(){
                     , 2024
                 </span>
             </div>
-            <div className="right-0 font-lower">
+            <div className="right-0 font-lower text-blue">
                 <Link href="/">
                     pochta@sfu-kras.ru
                 </Link>
