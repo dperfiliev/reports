@@ -8,13 +8,13 @@ interface Props{
 
 export default function GuberCard({link, title, description}: Props){
     return(
-        <div className="bg-gray-400 my-[20px] p-[20px] rounded-2xl shadow-xl hover:shadow-gray-900 transition-all grid place-items-center">
-            <div className="relative w-56 h-64">
-                <Image src={link} alt="img" fill sizes="100vw" className="mx-auto w-[100%] mb-3 object-cover rounded-xl"/>
+        <div className="cursor-pointer bg-white my-2 p-2 md:p-4 tem rounded-2xl shadow-gray-200 shadow-md hover:shadow-gray-400 transition-all">
+            <div className="relative w-full  h-44 md:h-72">
+                <Image src={link} alt="img" fill sizes="100vw" className="mx-auto w-[100%] object-cover rounded-xl"/>
             </div>
             <div>
-                <h1 className="text-blue mb-2 text-base font-upper">{title}</h1>
-                <p className="text-xs font-lower">{description}</p>
+                <h1 className="mt-2 text-blue text-[10px] sm:text-sm md:text-base font-upper">{title}</h1>
+                <p className="mt-1 text-[8px] sm:text-xs md:text-sm font-lower">{description}</p>
             </div>
         </div>
     )

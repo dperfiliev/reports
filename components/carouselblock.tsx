@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import type { CarouselApi } from './ui/carousel'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from './ui/carousel'
+import { Carousel, CarouselContent, CarouselItem} from './ui/carousel'
+//import { CarouselNext, CarouselPrevious} from './ui/carousel'
 import GuberCard from './gubercard'
 import { Progress } from './ui/progress'
 
@@ -50,14 +51,6 @@ export default function CarouselBlock() {
     const [current, setCurrent] = useState(0)
     const [count, setCount] = useState(0)
 
-    // let prog = emblaApi?.scrollProgress();
-    
-    // emblaApi?.on('scroll', () => {
-    //     prog = Math.ceil(emblaApi?.scrollProgress() * 100)
-    //     setCurr(prog)
-    //   }
-    // )
-
     useEffect(() => {
         if (!emblaApi) {
           return
@@ -81,11 +74,11 @@ export default function CarouselBlock() {
                //dragFree: true
                skipSnaps: true
             }}
-            className='mx-auto w-[90%]'
+            className='mx-auto'
         >
             <CarouselContent>
                 {cards.map((item, index) => (
-                    <CarouselItem key={index} className=" sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <div>
                         <GuberCard  link={item.link} title={item.title} description={item.description}>
                         </GuberCard>
@@ -93,11 +86,18 @@ export default function CarouselBlock() {
                 </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+        {/*
+        <CarouselPrevious />
+        <CarouselNext />
+            */}
+
         </Carousel>
 
-        <Progress value={(current/count) * 100} className="mt-3 bg-slate-700"/>
+        <Progress value={(current/count) * 100} className="mt-3" />
+
+        <h2>
+            {(current/count) * 100}
+        </h2>
     </>
     )
 }
