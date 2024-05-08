@@ -1,10 +1,10 @@
-import ReportCard from "./reportcard"
+import ReportCard from "./ReportCard"
 
 const cards = [
     {
         link: "/images/img1.jpg",
         title: "Отчет губернатора за 1823 г.",
-        description: "Российский государственный исторический архив"
+        description: "Российский государственный исторический архив Российский государственный исторический архив"
     },
     {
         link: "/images/img2.jpg",
@@ -42,10 +42,7 @@ export default function ReportsContainer(){
     return(
         <div className="mx-auto grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {cards.map((item, index) => (
-                <div key={index}>
-                    <ReportCard  link={item.link} title={item.title} description={item.description}>
-                    </ReportCard>
-                </div>
+                <ReportCard key={index}  link={item.link} title={item.title} description={item.description} />
             ))}
         </div>
     )

@@ -10,10 +10,6 @@ const config = {
 	],
   prefix: "",
   theme: {
-    fontFamily: {
-      'upper': ["Involve-Regular", "sans-serif"], 
-      'lower': ["DejaVuSans-ExtraLight", "sans-serif"]
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -76,6 +72,10 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        'upper': ["Involve-Regular", "sans-serif"], 
+        'lower': ["DejaVuSans-ExtraLight", "sans-serif"]
       },
     },
   },

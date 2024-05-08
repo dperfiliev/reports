@@ -72,7 +72,7 @@ export default function CarouselBlock() {
                dragThreshold: 20,
                dragFree: false,
                //dragFree: true
-               skipSnaps: true
+               skipSnaps: ((typeof window !== "undefined") && (window.innerWidth > 768)) ? true : false
             }}
             className='mx-auto'
         >
@@ -94,10 +94,6 @@ export default function CarouselBlock() {
         </Carousel>
 
         <Progress value={(current/count) * 100} className="mt-3" />
-
-        <h2>
-            {(current/count) * 100}
-        </h2>
     </>
     )
 }
