@@ -1,4 +1,4 @@
-import ReportCard from "./ReportCard"
+import ReportCard from "./report-card"
 
 const cards = [
     {
