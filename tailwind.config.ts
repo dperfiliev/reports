@@ -74,8 +74,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        'upper': ["Involve-Regular", "sans-serif"], 
-        'lower': ["DejaVuSans-ExtraLight", "sans-serif"]
+        'upper': ['var(--font-Involve)', "sans-serif"], 
+        'lower': ['var(--font-DejaVu)', "sans-serif"]
       },
     },
   },
