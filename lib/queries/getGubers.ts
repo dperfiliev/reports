@@ -10,29 +10,39 @@ export default async function getGubers({
 }) {
     const query = `
     query Gubers($gubersPagination2: PaginationArg) {
-        gubers(pagination: $gubersPagination2) {
-          meta {
-            pagination {
-              total
-            }
+      gubers(pagination: $gubersPagination2) {
+        meta {
+          pagination {
+            total
           }
-          data {
-            id
-            attributes {
-              name
-              description
-              period
-              img {
-                data {
-                  attributes {
-                    url
-                  }
+        }
+        data {
+          id
+          attributes {
+            name
+            description
+            
+            img {
+              data {
+                attributes {
+                  url
                 }
-              }  
+              }
             }
+            periods {
+              data {
+                id
+                attributes {
+                  value
+                }
+              }
+            }
+            rank
+            service
           }
         }
       }
+    }
     `
     const json = await fetchData<GubersArrayT>({
         query,

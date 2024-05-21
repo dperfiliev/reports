@@ -32,14 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${Involve.variable} ${DejaVu.variable} container mx-auto px-[15px] md:px-[50px]`}>
-        <BgFixed/>
-        <Header />
-        <div className="relative">
-          {children}
-        </div>
-        <Footer />
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className={`${Involve.variable} ${DejaVu.variable} scroll-smooth flex flex-col items-start overflow-x-hidden`}>
+          <BgFixed/>
+          <Header />
+
+          <div className="relative container mx-auto px-4 md:px-12 min-h-screen">
+            {children}
+          </div>
+
+          <Footer />
         </body>
     </html>
   );

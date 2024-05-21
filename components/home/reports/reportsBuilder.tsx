@@ -1,4 +1,4 @@
-import FindOut from "../findout"
+import ReportsFindOut from "./reportsFindOut"
 import ReportCard from "./reportCard"
 import HelpProject from "../../helpProject"
 
@@ -6,40 +6,41 @@ import getReports from "@/lib/queries/getReports"
 
 export default async function Reports() {
 
-    const [ dataResult ] = await Promise.allSettled([ 
+    const [dataResult] = await Promise.allSettled([
         getReports({ pageSize: 8 })
     ])
 
     if (dataResult.status === "rejected") {
         if ((dataResult.reason as Error).message === "NEXT_NOT_FOUND") {
-            return <h1>NOT_FOUND</h1>
+            return <h1>Информация не найдена</h1>
         } else {
-            return <h1>ОЩИБКА!!!!!!!!!!!!!!!!</h1>
+            return <h1>Ошибка обработки запроса</h1>
         }
     }
 
-    
-    return(
+
+    return (
         <div className="mt-8 md:mt-16">
             <div className="mb-2 md:mb-4">
-                <h1 className="font-upper text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                    ПОСЛЕДНИЕ ОТЧЁТЫ 
+                <h1 className="custom-text-section">
+                    ПОСЛЕДНИЕ ОТЧЁТЫ
                 </h1>
             </div>
-            
-            <div className="mx-auto grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"> 
-            {dataResult.value.map((report) => (
-                <div key={report.id}>
-                    <ReportCard 
-                    link={report.attributes.img?.data?.attributes?.url}
-                    title={report.attributes.title} 
-                    description={report.attributes.description}
-                    />
-                </div>
-            ))}
+
+            <div className="mx-auto grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {dataResult.value.map((report) => (
+                    <div key={report.id}>
+                        <ReportCard
+                            id={report.id}
+                            image={report.attributes?.img?.data?.attributes?.url}
+                            title={report.attributes?.title}
+                            source={report.attributes?.source.data?.attributes?.name}
+                        />
+                    </div>
+                ))}
             </div>
             <HelpProject />
-            <FindOut />
+            <ReportsFindOut />
         </div>
     )
 }

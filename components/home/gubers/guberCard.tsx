@@ -1,35 +1,29 @@
 import Image from "next/image"
+import Link from "next/link"
 
-interface Props{
-    link: string | undefined,
+interface Props {
+    id: string,
+    image: string | undefined,
     name: string,
-    description: string,
-    period: string
+    rank: string,
+    service: string,
 }
 
-export default function GuberCard({link, name, description, period}: Props){
-
-    let imageUrl = "";
-
-    if (link != undefined) {
-        imageUrl = "http://127.0.0.1:1337" + link
-    }
-    else{
-        imageUrl = "/images/img1.jpg"
-    }
-
-    const cutDescription = description.length > 40 ? description.substring(0, 30) + "..." : description
-
-    return(
-        <div className="flex flex-col justify-end gap-3 cursor-pointer h-full bg-white p-2 md:p-4 rounded-2xl shadow-gray-200 shadow-md hover:shadow-gray-400 transition-all">
-            <h1 className="font-bold font-upper text-[10px] sm:text-xs md:text-sm lg:text-base">{period}</h1>
-            <div className="relative w-full h-28 md:h-36 lg:h-44">
-                <Image src={imageUrl} alt="img" fill sizes="100vw" className="mx-auto w-[100%] object-cover rounded-xl"/>
+export default function GuberCard({ id, image, name, rank, service }: Props) {
+    const cutRank = rank?.length > 40 ? rank.substring(0, 30) + "..." : rank
+    const cutService = service?.length > 30 ? service.substring(0, 30) + "..." : service
+    return (
+        <Link href={`/allGubers/guber/${id}`}>
+            <div className="flex flex-col justify-top gap-3 cursor-pointer h-full bg-white p-2 md:p-4 rounded-2xl shadow-gray-200 shadow-md hover:shadow-gray-400 transition-all">
+                <h1 className="font-bold custom-text-big">{cutService}</h1>
+                <div className="relative w-full h-28 md:h-36 lg:h-44">
+                    <Image src={image ? image : "/images/img1.jpg"} alt="img" fill sizes="100vw" className="mx-auto w-[100%] object-cover rounded-xl" />
+                </div>
+                <div>
+                    <h1 className="text-blue font-bold custom-text-big">{name.substring(0, name.indexOf(" "))} <br /> {name.substring(name.indexOf(" "))} </h1>
+                    <p className="mt-2 custom-text-small">{cutRank}</p>
+                </div>
             </div>
-            <div>
-                <h1 className="text-blue font-bold font-upper text-xs sm:text-sm md:text-base lg:text-lg">{name.substring(0, name.indexOf(" "))} <br/> {name.substring(name.indexOf(" "))} </h1>
-                <p className="mt-2 font-lower text-[10px] sm:text-xs md:text-sm lg:text-base">{cutDescription}</p>
-            </div>
-        </div>
+        </Link>
     )
 }

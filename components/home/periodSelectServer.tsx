@@ -1,0 +1,35 @@
+import {
+    SelectGroup,
+    SelectItem,
+} from "@/components/ui/select"
+
+import getPeriods from "@/lib/queries/getPeriods"
+
+export default async function PeriodSelectServer() {
+
+
+    const [dataResult] = await Promise.allSettled([
+        getPeriods({ })
+    ])
+
+    if (dataResult.status === "rejected") {
+        if ((dataResult.reason as Error).message === "NEXT_NOT_FOUND") {
+            return <h1>Информация не найдена</h1>
+        } else {
+            return <h1>Ошибка обработки запроса</h1>
+        }
+    }
+
+    return (
+        <div>
+            <SelectGroup>
+                {
+                    dataResult.value.map((item) => (
+                        <SelectItem className=""
+                            key={item.id} value={item.attributes.value}>{item.attributes.value}</SelectItem>
+                    ))
+                }
+            </SelectGroup>
+        </div>
+    )
+}

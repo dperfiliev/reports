@@ -22,15 +22,21 @@ export default async function getReports({
             title
             description
             pages
-            output
-            source
             img {
               data {
                 attributes {
                   url
                 }
               }
-            }  
+            }
+            source {
+              data {
+                id
+                attributes {
+                  name
+                }
+              }
+            }
           }
         }
       }
