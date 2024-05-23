@@ -102,7 +102,7 @@ interface ReportT {
         attributes: {
           name: string,
           url: string
-        } | null
+        }
       }
     }
     contents: [

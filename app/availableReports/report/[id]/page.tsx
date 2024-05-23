@@ -4,10 +4,13 @@ import AvailableReportsInfo from "@/components/availableReports/availableReports
 import { OneReportBreadcrumb } from "@/components/availableReports/oneReportsBreadcrumb"
 import dynamic from "next/dynamic"
 import { ClientHydration } from "@/components/ClientHydration"
+import { Suspense } from "react"
+import { Loader2 } from "lucide-react"
+import Script from "next/script"
 
-const PDFViewer = dynamic(() => import('./pdfViewer'), {loading: () => <p>Loading...</p>,})
+const PDFViewer = dynamic(() => import('./pdfViewer'), {loading: () => <p>Loading...</p>, ssr: false})
 
-export default async function Guber({ params }: { params: { id: string } }) {
+export default async function Report({ params }: { params: { id: string } }) {
 
     const [dataResult] = await Promise.allSettled([
         getReport({ id: params.id })
@@ -21,7 +24,6 @@ export default async function Guber({ params }: { params: { id: string } }) {
         }
     }
 
-    // const imageUrl = dataResult.value.attributes.img.data.attributes?.url
     return (
         <div className="w-full h-full mt-3 sm:mt-6 md:mt-8 lg:mt-10">
             <div>
@@ -31,9 +33,12 @@ export default async function Guber({ params }: { params: { id: string } }) {
                 {dataResult.value.attributes?.title}
             </h1>
 
-            <ClientHydration fallback={"...Loading"}>
-                <PDFViewer file="https://s3.amazonaws.com/pdftron/downloads/pl/2gb-sample-file.pdf" />
-            </ClientHydration>
+            <Script src="/pdf.worker.min.js" />
+            <Suspense fallback={<Loader2 className="animate-spin w-8 h-8" />}>
+                <ClientHydration fallback={<Loader2 className="animate-spin w-8 h-8" />}>
+                    <PDFViewer file={dataResult.value.attributes.file.data.attributes.url} contents={dataResult.value.attributes.contents} />
+                </ClientHydration>
+            </Suspense>
 
             <div className="mt-4 md:mt-8 flex">
             </div>

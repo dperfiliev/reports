@@ -4,11 +4,11 @@ import { notFound } from "next/navigation"
 import fetchData from "./fetchData"
 
 export default async function getReport({ 
-    id
+  id
 }: { 
-    id: string
+  id: string
 }) {
-    const query = `
+  const query = `
     query Report($reportId: ID) {
       report(id: $reportId) {
         data {
@@ -68,15 +68,15 @@ export default async function getReport({
         }
       }
     }
-    `
-    const json = await fetchData<ReportIdT>({
-        query,
-        variables: {
-            reportId: id
-          }
-    })
+  `
+  const json = await fetchData<ReportIdT>({
+    query,
+    variables: {
+      reportId: id
+    }
+  })
 
-    if (json.data === null) notFound()
+  if (json.data === null) notFound()
 
-    return json.data.report.data
+  return json.data.report.data
 }
