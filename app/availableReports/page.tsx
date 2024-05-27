@@ -32,14 +32,20 @@ export default function AvailableReports({
 
                 <div className="mt-4 md:mt-8 flex space-x-2">
 
-                    <SourseSelect
-                        childrenSource={<SourceSelectServer />}
-                        childrenPeriod={<PeriodSelectServer />}
-                        childrenTextType={<TextTypeSelectServer />}
-                        paramSource="source"
-                        paramPeriod="period"
-                        paramTextType="textType">
-                    </SourseSelect>
+                    <Suspense>
+                        <SourseSelect
+                            childrenSource={<SourceSelectServer />}
+                            childrenPeriod={<PeriodSelectServer />}
+                            childrenTextType={
+                                <Suspense>
+                                    <TextTypeSelectServer />
+                                </Suspense>
+                            }
+                            paramSource="source"
+                            paramPeriod="period"
+                            paramTextType="textType">
+                        </SourseSelect>
+                    </Suspense>
 
                 </div>
                 <Suspense key={`source=${source}period=${period}textType=${textType}`} fallback={"...Loading"}>

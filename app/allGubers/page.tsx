@@ -7,6 +7,7 @@ import PeriodSelectServer from "@/components/home/periodSelectServer"
 
 import { GubersBreadcrumb } from "@/components/allGubers/gubersBreadcrumb"
 import InputGetData from "@/components/allGubers/GubersFilter"
+import { Suspense } from "react"
 
 export default function AllGubers( { searchParams }: {searchParams: { [key: string]: string | string[] | undefined }}) {
 
@@ -22,10 +23,11 @@ export default function AllGubers( { searchParams }: {searchParams: { [key: stri
             <div className="mt-4 md:mt-8">
                 <div className="flex gap-3">
 
-                
-                <InputGetData param="StartsWith" paramPeriod="period">
-                <PeriodSelectServer />
-                </InputGetData>
+                <Suspense>
+                    <InputGetData param="StartsWith" paramPeriod="period">
+                        <PeriodSelectServer />
+                    </InputGetData>
+                </Suspense>
                     
                 </div>
 
