@@ -2,7 +2,7 @@
 
 import { usePdfTextSearch } from "@/lib/usePdfTextSearch";
 import useResizeObserver from "@react-hook/resize-observer";
-import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { pdfjs, Document, Page } from 'react-pdf';
