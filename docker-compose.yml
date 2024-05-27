@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  reports-client:
+    container_name: reports-client
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL}
+        NEXT_PUBLIC_CMS_API_URL: ${NEXT_PUBLIC_CMS_API_URL}
+        NEXT_PUBLIC_CMS_DOMAIN: ${NEXT_PUBLIC_CMS_DOMAIN}
+    restart: always
+    volumes:
+      - client_next_cache_reports:/app/.next/cache
+    ports:
+      - 3002:3000
+    networks:
+      - reports-net
+
+  # Add more containers below (nginx, postgres, etc.)
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  reports-net:
+    name: reports-net
+    external: true
+
+volumes:
+  client_next_cache_reports:
+    external: true
