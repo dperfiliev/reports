@@ -20,7 +20,7 @@ export default async function GuberServer() {
 
 
     return (
-        <CarouselContent>
+        <CarouselContent className="">
             {dataResult.value.map((guber) => (
                 <CarouselItem key={guber.id} className="basis-1/2 md:basis-1/3 lg:basis-1/4 my-2">
                     <GuberCard id={guber.id}

@@ -7,12 +7,17 @@ import AvailableReportsBuilder from "@/components/availableReports/availableRepo
 import PeriodSelectServer from "@/components/home/periodSelectServer"
 import TextTypeSelectServer from "@/components/availableReports/textTypeSelectServer"
 import { ReportsBreadcrumb } from "@/components/availableReports/reportsBreadcrumb"
+import { Suspense } from "react"
 
 export default function AvailableReports({
     searchParams
 }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
+
+    const source = searchParams["source"] as string | undefined
+    const period = searchParams["period"] as string | undefined
+    const textType = searchParams["textType"] as string | undefined
 
     return (
         <div className="h-full w-full mt-3 sm:mt-6 md:mt-8 lg:mt-10">
@@ -37,8 +42,9 @@ export default function AvailableReports({
                     </SourseSelect>
 
                 </div>
-
-                <AvailableReportsBuilder searchParams={searchParams} />
+                <Suspense key={`source=${source}period=${period}textType=${textType}`} fallback={"...Loading"}>
+                    <AvailableReportsBuilder searchParams={searchParams} />
+                </Suspense>
             </div>
 
         </div>

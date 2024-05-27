@@ -16,6 +16,8 @@ import Link from "next/link";
 export default function NavBurger() {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOutside, setIsOutside] = useState(false);
+
   const [selected, setSelected] = useState(1);
 
 
@@ -37,10 +39,15 @@ export default function NavBurger() {
     setIsOpen(!isOpen);
   };
 
+  const toggleOutside = () => {
+    setIsOpen(false);
+  };
+
   const itemSelect = (id: number) => {
     setSelected(id);
   };
 
+  console.log(selected)
   return (
     <div className="md:hidden flex items-center">
       <NavigationMenu>
@@ -50,17 +57,18 @@ export default function NavBurger() {
               <Image src={isOpen ? "/images/cross.svg" : "/images/hamburger.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover rounded-xl" />
             </NavigationMenuTrigger>
 
-            <NavigationMenuContent className="p-3 flex flex-col">
+            <NavigationMenuContent className="p-4 flex flex-col gap-4" onEscapeKeyDown={toggleOutside}>
 
               {
                 navs.map((item) => (
-                  <NavigationMenuLink key={item.id} onClick={() => itemSelect(item.id)}>
-                    <div className={selected === item.id ? `text-blue font-bold` : ""}>
-                      <Link className="custom-text-small-upper text-nowrap" href={item.link}>
+                  <div key={item.id}>
+                    <NavigationMenuLink href={item.link} onClick={() => itemSelect(item.id)}>
+                    <div className={selected === item.id ? `custom-text-section text-nowrap text-blue font-bold` : ""}>
                         {item.name}
-                      </Link>
                     </div>
-                  </NavigationMenuLink>
+                  </NavigationMenuLink>        
+                  </div>
+                  
                 ))
               }
 

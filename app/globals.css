@@ -49,6 +49,10 @@
   }
 }
 
+
+.custom-text-tiny {
+  @apply text-xs md:text-xs lg:text-sm font-lower;
+}
 .custom-text-small {
   @apply text-xs md:text-sm lg:text-base font-lower;
 }

@@ -1,6 +1,7 @@
 import LogoHolder from "./logoHolder"
 import Navigation from "./navigation"
-import NavBurger from "./navBurger"
+
+import NavMobile from "./NavMobile"
 
 export default function Header(){
     return (
@@ -13,7 +14,7 @@ export default function Header(){
             </div>
             {/* NAV */}
             <Navigation />
-            <NavBurger />
+            <NavMobile />
         </div>
     )
 }

@@ -16,7 +16,7 @@ export default function GuberCard({ id, image, name, description, rank, service 
             <Link href={`/allGubers/guber/${id}`}>
                 <div className="mb-5 w-full flex items-start">
                     <div className="relative flex-shrink-0 w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48">
-                        <Image src={image ? image : "/images/img1.jpg"} alt="img" fill sizes="100vw" className="mx-auto object-cover rounded-xl" />
+                        <Image src={image ? image : "/images/img1.jpg"} alt="img" fill sizes="30vw" className="mx-auto object-cover rounded-xl" />
                     </div>
                     <div className="ml-5 flex flex-col">
                         <h1 className="font-bold custom-text-big">

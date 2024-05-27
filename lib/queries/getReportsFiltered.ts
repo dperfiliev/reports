@@ -89,6 +89,8 @@ export default async function getReportsFiltered({
         }
     })
 
+    // await new Promise((resolve) => setTimeout(resolve, 2000))
+
     if (json.data.reports.meta.pagination.total === 0) notFound()
 
     return json.data.reports.data

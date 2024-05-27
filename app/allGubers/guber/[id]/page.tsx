@@ -19,7 +19,7 @@ export default async function Guber({ params }: { params: { id: string } }) {
     }
 
     const imageUrl = dataResult.value.attributes?.img.data.attributes?.url
-    const guberName = dataResult.value.attributes?.name 
+    const guberName = dataResult.value?.attributes?.name 
 
     return (
         <div className="w-full h-full mt-3 sm:mt-6 md:mt-8 lg:mt-10">

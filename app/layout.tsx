@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer";
-import BgFixed from "@/components/bgfixed";
+import BgFixed from "@/components/bgFixed";
 
 
 import CustomFont from 'next/font/local'

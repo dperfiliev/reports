@@ -108,6 +108,7 @@ export function SourseSelect({
 
     React.startTransition(() => {
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.refresh()
     });
   }, [paramSource, paramPeriod, paramTextType, pathname, router]);
   // if (isPending) return "...Loading"
@@ -139,7 +140,7 @@ export function SourseSelect({
       <div className="flex items-center gap-3 w-full">
         <Select disabled={isPendingTextType} defaultValue={currentValueTextType} value={valueTextType} onValueChange={handleSelectTextType}>
           <SelectTrigger className="w-full custom-text-button">
-            <SelectValue placeholder="Тип документа" />
+            <SelectValue placeholder="Тип текста" />
           </SelectTrigger>
 
           <SelectContent className="custom-text-button">

@@ -40,9 +40,7 @@ export default async function Report({ params }: { params: { id: string } }) {
                 </ClientHydration>
             </Suspense>
 
-            <div className="mt-4 md:mt-8 flex">
-            </div>
-            <div className="mt-8 md:mt-14">
+            <div className="mt-4 md:mt-8">
                 <AvailableReportsInfo
                     pages={dataResult.value.attributes?.pages}
                     textType={dataResult.value.attributes?.text_type?.data?.attributes?.name}

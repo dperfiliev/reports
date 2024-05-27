@@ -3,16 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import type { CarouselApi } from '../../ui/carousel'
 import { Carousel } from '../../ui/carousel'
-//import { Carousel, CarouselContent, CarouselItem} from './ui/carousel'
-
-import {
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-
-
-import { Progress } from '../../ui/progress'
-
 
 export default function CarouselBlock({ children }: { children: React.ReactNode }) {
 
@@ -43,7 +33,6 @@ export default function CarouselBlock({ children }: { children: React.ReactNode 
 
     const handleScroll = (index: number) => {
         setCurrentIndex(index);
-        console.log(current)
     };
 
     const dots = [];
@@ -59,7 +48,7 @@ export default function CarouselBlock({ children }: { children: React.ReactNode 
             <Carousel onMouseMove={() => handleScroll(current - 1)} onTouchMove={() => handleScroll(current - 1)}
                 setApi={setApi}
                 opts={{
-                    dragThreshold: 20,
+                    dragThreshold: 30,
                     dragFree: false,
                     skipSnaps: ((typeof window !== "undefined") && (window.innerWidth > 768)) ? true : false
                 }}
@@ -67,15 +56,17 @@ export default function CarouselBlock({ children }: { children: React.ReactNode 
             >
                 {children}
 
+                {/*
                 <div className='flex items-center justify-center mt-5'>
                     <CarouselPrevious variant="default" className='flex-shrink-0' />
                     <Progress value={(current / count) * 100} className="mx-3 w-full " />
                     <CarouselNext variant="default" className='flex-shrink-0' />
                 </div>
+                */}
 
             </Carousel>
 
-            <div className='mt-5 flex items-center justify-center gap-3'>
+            <div className='mt-8 flex items-center justify-center gap-3'>
                 {dots}
             </div>
         </>
