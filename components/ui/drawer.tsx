@@ -5,7 +5,7 @@ import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
 
-const DrawerContext = React.createContext<{direction?: "right" | "bottom"}>({})
+const DrawerContext = React.createContext<{direction?: "right" | "bottom" | "top" | "left"}>({})
 
 const Drawer = ({
   shouldScaleBackground = true,
