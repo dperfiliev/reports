@@ -9,65 +9,80 @@ export default async function getReport({
   id: string
 }) {
   const query = `
-    query Report($reportId: ID) {
-      report(id: $reportId) {
-        data {
-          id
-          attributes {
-            title
-            description
-            pages
-            output
-            text_type {
-              data {
-                id
-                attributes {
-                  name
-                }
-              }
-            }
-            img {
-              data {
-                id
-                attributes {
-                  url
-                }
-              }
-            }
-            file {
-              data {
-                id
-                attributes {
-                  name
-                  url
-                }
-              }
-            }
-            source {
-              data {
-                id
-                attributes {
-                  name
-                }
-              }
-            }
-            periods {
-              data {
-                id
-                attributes {
-                  value
-                }
-              }
-            }
-            contents {
+  query Report($reportId: ID) {
+    report(id: $reportId) {
+      data {
+        id
+        attributes {
+          title
+          description
+          pages
+          output
+          
+          text_type {
+            data {
               id
-              title
-              pageNumber
+              attributes {
+                name
+              }
             }
+          }
+          img {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          file {
+            data {
+              id
+              attributes {
+                name
+                url
+              }
+            }
+          }
+          fileSecond {
+            data {
+              id
+              attributes {
+                name
+                url
+              }
+            }
+          }
+          source {
+            data {
+              id
+              attributes {
+                name
+              }
+            }
+          }
+          periods {
+            data {
+              id
+              attributes {
+                value
+              }
+            }
+          }
+          contents {
+            id
+            title
+            pageNumber
+          }
+          contentsSecond {
+            id
+            title
+            pageNumber
           }
         }
       }
     }
+  }
   `
   const json = await fetchData<ReportIdT>({
     query,

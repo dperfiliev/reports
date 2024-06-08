@@ -1,7 +1,8 @@
-import CarouselBlock from "./carouselBlock"
-import GubersFindOut from "./gubersFindOut"
-import GuberServer from "./guberServer"
 
+import GubersFindOut from "./gubersFindOut"
+
+import GubersListScroll from "./GubersListScroll"
+import GubersServer from "./GubersServer"
 
 export default function Gubers(){
 
@@ -13,9 +14,9 @@ export default function Gubers(){
                 </h1>
             </div>
            
-                <CarouselBlock>
-                    <GuberServer />
-                </CarouselBlock>
+                <GubersListScroll>
+                    <GubersServer />
+                </GubersListScroll>
         
             <GubersFindOut />
         </div>

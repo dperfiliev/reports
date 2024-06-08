@@ -61,24 +61,29 @@ interface TextTypesArrayT {
 interface ReportT {
   id: string,
   attributes: {
-    title: string,
+    title: string | undefined,
     description: string,
-    pages: number | null,
-    output: string | null,
+    pages: number | undefined,
+    output: string | undefined,
+    guber: {
+      data: {
+        id: string
+      } | undefined
+    },
     source: {
       data: {
         id: string
         attributes: {
           name: string
         }
-      }
+      } | undefined
     }
     img: {
       data: {
         attributes: {
           url: string
-        } | null
-      }
+        }
+      } | undefined
     }
     text_type: {
       data: {
@@ -86,7 +91,7 @@ interface ReportT {
         attributes: {
           name: string
         }
-      }
+      } | undefined
     }
     periods: {
       data: {
@@ -94,7 +99,7 @@ interface ReportT {
         attributes: {
           value: string
         }
-      }
+      } | undefined
     }
     file: {
       data: {
@@ -103,14 +108,30 @@ interface ReportT {
           name: string,
           url: string
         }
-      }
+      } | undefined
+    }
+    fileSecond: {
+      data: {
+        id: string,
+        attributes: {
+          name: string,
+          url: string
+        }
+      } | undefined
     }
     contents: [
       {
         id: string,
-        pageNumber: number
-        title: string
-      }
+        pageNumber: number | undefined
+        title: string | undefined
+      } | undefined
+    ]
+    contentsSecond: [
+      {
+        id: string,
+        pageNumber: number | undefined
+        title: string | undefined
+      } | undefined
     ]
   }
 }
@@ -145,13 +166,13 @@ interface GuberT {
     description: string,
     periods: {
       data: PeriodT[]
-    }
+    } | undefined
     img: {
       data: {
         attributes: {
           url: string
-        } | null
-      }
+        } 
+      } | undefined
     },
     rank: string,
     service: string,
@@ -162,7 +183,7 @@ interface GuberT {
 interface HistoryT {
   year: string,
   text: string
-}
+} 
 
 interface GuberIdT {
   data: {

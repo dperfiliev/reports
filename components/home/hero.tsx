@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function Hero() {
     return (
-        <div className="h-full w-full mt-3 sm:mt-6 md:mt-8 lg:mt-10">
+        <div className="h-full w-full mt-6 md:mt-8 lg:mt-12">
             <div className="w-full lg:w-4/5">
                 <h1 className="custom-text-huge text-nowrap">
                     ОТЧЁТЫ ГУБЕРНАТОРОВ

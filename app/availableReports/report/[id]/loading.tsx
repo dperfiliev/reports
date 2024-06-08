@@ -1,9 +1,9 @@
 import React from 'react'
+import { Loader2 } from "lucide-react"
+
 
 export default function Loading() {
   return (
-    <div>
-      ...Loading
-    </div>
+    <Loader2 className="mt-20 mx-auto m-auto animate-spin w-8 h-8" />
   )
 }

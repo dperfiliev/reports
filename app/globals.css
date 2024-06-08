@@ -49,7 +49,6 @@
   }
 }
 
-
 .custom-text-tiny {
   @apply text-xs md:text-xs lg:text-sm font-lower;
 }
@@ -78,5 +77,28 @@
 
 .custom-text-huge {
   @apply text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-upper;
+}
+
+
+.gubers-scroll > div {
+  display: block !important;
+}
+
+.period-scroll > div {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.header-shadow{
+  box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-invisible {
+  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none;  /* Для IE и Edge */
+}
+
+.scroll-invisible::-webkit-scrollbar {
+  display: none; /* Для Chrome, Safari и Opera */
 }
 

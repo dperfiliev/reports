@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from "react"
+import React from "react"
 import { useState } from "react";
 import {
   Select,
@@ -12,8 +12,9 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "../ui/button";
+import Image from "next/image";
 
-export function SourseSelect({
+export function ReportsFilter({
   childrenSource,
   childrenPeriod,
   childrenTextType,
@@ -54,7 +55,7 @@ export function SourseSelect({
   const handleSelectSource = React.useCallback((valueSource: string | null) => {
     const params = new URLSearchParams(window.location.search)
 
-    if ((valueSource !== null) && (valueSource.length > 0)) {
+    if ((valueSource !== null) && (valueSource?.length > 0)) {
       setValueSource(valueSource)
       params.set(paramSource, valueSource)
     } else {
@@ -69,7 +70,7 @@ export function SourseSelect({
   const handleSelectPeriod = React.useCallback((valuePeriod: string | null) => {
     const params = new URLSearchParams(window.location.search)
 
-    if ((valuePeriod !== null) && (valuePeriod.length > 0)) {
+    if ((valuePeriod !== null) && (valuePeriod?.length > 0)) {
       setValuePeriod(valuePeriod)
       params.set(paramPeriod, valuePeriod)
     } else {
@@ -84,7 +85,7 @@ export function SourseSelect({
   const handleSelectTextType = React.useCallback((valueTextType: string | null) => {
     const params = new URLSearchParams(window.location.search)
 
-    if ((valueTextType !== null) && (valueTextType.length > 0)) {
+    if ((valueTextType !== null) && (valueTextType?.length > 0)) {
       setValueTextType(valueTextType)
       params.set(paramTextType, valueTextType)
     } else {
@@ -97,63 +98,128 @@ export function SourseSelect({
   }, [paramTextType, pathname, router])
 
 
-  const handleReset = React.useCallback(() => {
+  const handleSourceReset = React.useCallback(() => {
     setValueSource('')
-    setValuePeriod('');
-    setValueTextType('');
     const params = new URLSearchParams(window.location.search);
     params.delete(paramSource);
+
+    React.startTransition(() => {
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.refresh()
+    });
+  }, [paramSource, pathname, router])
+
+  const handlePeriodReset = React.useCallback(() => {
+    setValuePeriod('');
+    const params = new URLSearchParams(window.location.search);
     params.delete(paramPeriod);
+
+    React.startTransition(() => {
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      router.refresh()
+    });
+  }, [paramPeriod, pathname, router])
+
+  const handleTextTypeReset = React.useCallback(() => {
+    setValueTextType('')
+    const params = new URLSearchParams(window.location.search);
     params.delete(paramTextType);
 
     React.startTransition(() => {
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
       router.refresh()
     });
-  }, [paramSource, paramPeriod, paramTextType, pathname, router]);
+  }, [paramTextType, pathname, router])
+
   // if (isPending) return "...Loading"
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-3 w-full mb-4">
-      <div className="flex items-center gap-3 w-full">
+    <div className="mb-4">
+      <div className="flex items-center space-x-10 w-full">
         <Select disabled={isPendingSource} defaultValue={currentValueSource} value={valueSource} onValueChange={handleSelectSource}>
-          <SelectTrigger className="w-full custom-text-button" >
-            <SelectValue placeholder="Источник" className="custom-text-button" />
+          <SelectTrigger className="w-fit custom-text-button text-left">
+            <SelectValue placeholder="Источник" className="custom-text-button text-left">
+            <p>
+              Источник
+            </p>
+          
+            </SelectValue>
           </SelectTrigger>
 
-          <SelectContent className="custom-text-button">
+          <SelectContent className="custom-text-button" classNamePrimitive="w-72">
             {childrenSource}
           </SelectContent>
         </Select>
 
         <Select disabled={isPendingPeriod} defaultValue={currentValuePeriod} value={valuePeriod} onValueChange={handleSelectPeriod}>
-          <SelectTrigger className="w-full custom-text-button">
-            <SelectValue placeholder="Период" />
+          <SelectTrigger className="w-fit custom-text-button">
+            <SelectValue placeholder="Период" >
+            <p>
+              Период
+            </p>
+            </SelectValue>
           </SelectTrigger>
 
           <SelectContent className="custom-text-button">
             {childrenPeriod}
           </SelectContent>
         </Select>
-      </div>
 
-      <div className="flex items-center gap-3 w-full">
         <Select disabled={isPendingTextType} defaultValue={currentValueTextType} value={valueTextType} onValueChange={handleSelectTextType}>
-          <SelectTrigger className="w-full custom-text-button">
-            <SelectValue placeholder="Тип текста" />
+          <SelectTrigger className="w-fit custom-text-button">
+            <SelectValue placeholder="Тип текста" >
+            <p>
+            Тип текста
+            </p>
+            </SelectValue>
           </SelectTrigger>
 
           <SelectContent className="custom-text-button">
             {childrenTextType}
           </SelectContent>
         </Select>
-
-        <Button onClick={handleReset}
-          className="bg-red-500 custom-text-button text-white hover:bg-white hover:text-red-500">
-          Сбросить
-        </Button>
       </div>
 
+
+
+      <div className="flex flex-col lg:flex-row">
+
+        <div className={valueSource === undefined || valueSource === "" ? "hidden" : "block mt-4 mr-2"}>
+          <div className="flex items-center justify-center w-72 sm:w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
+            <p className="custom-text-small ml-2 text-nowrap overflow-hidden">
+              {valueSource}
+            </p>
+            <Button className="relative h-4" onClick={handleSourceReset}>
+              <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex">
+        <div className={valuePeriod === undefined || valuePeriod === "" ? "hidden" : "block mt-4 mr-2"}>
+          <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
+            <p className="custom-text-small ml-2">
+              {valuePeriod}
+            </p>
+            <Button className="relative h-4" onClick={handlePeriodReset}>
+              <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
+            </Button>
+          </div>
+        </div>
+
+        <div className={valueTextType === undefined || valueTextType === "" ? "hidden" : "block mt-4"}>
+          <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
+            <p className="custom-text-small ml-2">
+              {valueTextType}
+            </p>
+            <Button className="relative h-4" onClick={handleTextTypeReset}>
+              <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
+            </Button>
+          </div>
+        </div>
+        </div>
+
+      </div>
     </div>
   )
 }

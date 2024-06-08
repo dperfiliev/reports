@@ -1,8 +1,8 @@
 interface Props {
-    pages: number | null,
-    textType: string,
-    source: string,
-    output: string | null
+    pages: number | undefined,
+    textType: string | undefined
+    source: string | undefined,
+    output: string | undefined
 }
 
 export default function AvailableReportsInfo({ pages, textType, source, output }: Props) {

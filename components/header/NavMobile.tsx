@@ -1,11 +1,11 @@
 'use client'
 
+import React from 'react';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -13,7 +13,6 @@ import {
 
 import Link from "next/link"
 import Image from "next/image"
-
 import { useState } from "react"
 
 interface navItemT {
@@ -23,7 +22,6 @@ interface navItemT {
 }
 
 export default function NavMobile() {
-  const [selected, setSelected] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
 
   const navs: Array<navItemT> = [
@@ -33,8 +31,7 @@ export default function NavMobile() {
     { id: 4, name: "О ПРОЕКТЕ", link: "/about" },
   ]
 
-  const itemSelect = (id: number) => {
-    setSelected(id);
+  const itemSelect = () => {
     setIsOpen(false); // Закрываем Drawer
   };
 
@@ -45,7 +42,7 @@ export default function NavMobile() {
           <Image src={"/images/hamburger.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover" />
         </DrawerTrigger>
         <DrawerContent className="flex flex-col items-center justify-center sm:hidden">
-          <DrawerClose className="relative w-7 h-7 self-end mr-5" onClick={() => setIsOpen(false)}>
+          <DrawerClose className="relative w-10 h-10 self-end mr-5" onClick={() => setIsOpen(false)}>
             <Image src={"/images/cross.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover" />
           </DrawerClose>
           <DrawerHeader>
@@ -53,27 +50,31 @@ export default function NavMobile() {
             <DrawerDescription></DrawerDescription>
           </DrawerHeader>
 
-          <div className="flex flex-col justify-center items-center gap-8">
-            {
-              navs.map((item) => (
-                <div key={item.id}>
-                  <Link href={item.link} onClick={() => itemSelect(item.id)} className="custom-text-section text-nowrap">
-                    <div className={selected === item.id ? `custom-text-huge text-blue font-bold` : ""}>
-                      {item.name}
-                    </div>
-                  </Link>        
-                </div>
-              ))
-            }
+          <div className="h-screen flex flex-col justify-evenly">
+            <div className="flex flex-col items-center gap-8">
+              {
+                navs.map((item) => (
+                  <div key={item?.id}>
+                    <Link href={item?.link} onClick={() => itemSelect()} className="text-2xl font-upper text-nowrap">
+                      <div>
+                        {item?.name}
+                      </div>
+                    </Link>        
+                  </div> 
+                ))
+              }
+            </div>
+
+              <div className="relative mb-4 h-64 w-64">
+                <Image src={"/images/bg.png"} alt="img" fill sizes="30vw" priority={true} className="" />
+              </div>
           </div>
 
-          <DrawerFooter className="w-full h-full flex justify-end">
-            <div className="relative w-full h-[50vh]">
-              <Image src={"/images/BgMobile.png"} alt="img" fill sizes="30vw" priority={true} className="object-cover object-top" />
-            </div>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </div>
   )
 }
+
+
+//<Image src={"/images/BgMobile.png"} alt="img" fill sizes="30vw" priority={true} className="object-cover object-top" />

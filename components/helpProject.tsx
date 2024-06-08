@@ -16,8 +16,8 @@ export default function HelpProject() {
                         </p>
                     </div>
                     <Link href="https://fromthepage.sfu-kras.ru/lib/governors-reports">
-                        <button className="px-3 py-1 border-2 border-blue rounded-xl cursor-pointer hover:shadow-md transition-all">
-                            <span className="custom-text-button flex items-center">
+                        <button className="px-3 py-1 border border-gray-400 rounded-full cursor-pointer hover:shadow-md transition-all">
+                            <span className="custom-text-small flex items-center">
                                 Перейти к расшифровке
                             </span>
                         </button>

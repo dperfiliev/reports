@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from "react"
+import React from "react"
 import { useState } from "react";
 
 
@@ -30,7 +30,7 @@ export function TextTypeSelect({ children, param }: { children: React.ReactNode,
   const handleSelect = React.useCallback((value: string | null) => {
     const params = new URLSearchParams(window.location.search)
 
-    if ((value !== null) && (value.length > 0)) {
+    if ((value !== null) && (value?.length > 0)) {
       setValue(value)
       params.set(param, value)
     } else {

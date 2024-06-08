@@ -18,9 +18,9 @@ export default async function AvailableReportsBuilder({
 
     if (dataResult.status === "rejected") {
         if ((dataResult.reason as Error).message === "NEXT_NOT_FOUND") {
-            return <h1>Информация не найдена</h1>
+            return <h1 className="custom-text-tiny">Информация не найдена</h1>
         } else {
-            return <h1>Ошибка обработки запроса</h1>
+            return <h1 className="custom-text-tiny">Ошибка обработки запроса</h1>
         }
     }
 
@@ -30,12 +30,12 @@ export default async function AvailableReportsBuilder({
             className=" mx-auto grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
             {dataResult.value.map((report) => (
-                <div key={report.id}>
+                <div key={report?.id}>
                     <ReportCard
-                        id={report.id}
-                        image={report.attributes.img?.data?.attributes?.url}
-                        title={report.attributes.title}
-                        source={report.attributes?.source.data?.attributes?.name}
+                        id={report?.id}
+                        image={report.attributes?.img?.data?.attributes?.url}
+                        title={report.attributes?.title}
+                        source={report.attributes?.source?.data?.attributes?.name}
                     />
                 </div>
             ))}
