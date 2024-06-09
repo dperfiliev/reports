@@ -20,12 +20,12 @@ export function OneReportBreadcrumb({ reportName }: { reportName: string }) {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/availableReports/">Отчёты
+                        <BreadcrumbLink href="/availableReports">Отчёты
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage className="text-blue font-bold">
+                        <BreadcrumbPage className="text-blue font-bold line-clamp-1">
                             {reportName}
                         </BreadcrumbPage>
                     </BreadcrumbItem>

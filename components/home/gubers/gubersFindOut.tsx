@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function GubersFindOut() {
     return (
-        <div className="mt-6 flex items-baseline cursor-pointer">
+        <div>
             <Link href="/allGubers" className="mt-6 flex items-baseline cursor-pointer">
                 <span className="text-blue font-bold custom-text-small">
                     Узнать больше

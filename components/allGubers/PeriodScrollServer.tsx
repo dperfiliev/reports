@@ -8,9 +8,9 @@ export default async function PeriodScrollServer() {
 
     if (dataResult.status === "rejected") {
         if ((dataResult.reason as Error).message === "NEXT_NOT_FOUND") {
-            return <h1 className="custom-text-tiny">Информация не найдена</h1>
+            return <h1 className="custom-text-tiny hidden lg:block">Информация не найдена</h1>
         } else {
-            return <h1 className="custom-text-tiny">Ошибка обработки запроса</h1>
+            return <h1 className="custom-text-tiny hidden lg:block">Ошибка обработки запроса</h1>
         }
     }
 

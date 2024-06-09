@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function HelpProject() {
     return (
-        <div className="relative mt-4 md:mt-8 flex items-center bg-white shadow-gray-200 shadow-md rounded-xl">
+        <div className="relative mt-6 md:mt-8 flex items-center bg-white shadow-gray-200 shadow-md rounded-xl">
             <div className="absolute z-10">
                 <div className="px-2 md:p-4">
                     <div>

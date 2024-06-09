@@ -55,7 +55,7 @@ export default function NavMobile() {
               {
                 navs.map((item) => (
                   <div key={item?.id}>
-                    <Link href={item?.link} onClick={() => itemSelect()} className="text-2xl font-upper text-nowrap">
+                    <Link href={item?.link} onClick={() => itemSelect()} className="text-xl font-upper text-nowrap">
                       <div>
                         {item?.name}
                       </div>
@@ -65,8 +65,8 @@ export default function NavMobile() {
               }
             </div>
 
-              <div className="relative mb-4 h-64 w-64">
-                <Image src={"/images/bg.png"} alt="img" fill sizes="30vw" priority={true} className="" />
+              <div className="relative mb-4 h-60 w-60">
+                <Image src={"/images/bg.png"} alt="img" fill sizes="50vw" priority={true} className="" />
               </div>
           </div>
 

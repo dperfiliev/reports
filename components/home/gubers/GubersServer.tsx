@@ -6,7 +6,7 @@ import GuberCard from "./guberCard"
 
 export default async function GubersServer() {
     const [dataResult] = await Promise.allSettled([
-        getGubers({ pageSize: 8 })
+        getGubers({ })
     ])
 
     if (dataResult.status === "rejected") {
@@ -25,7 +25,7 @@ export default async function GubersServer() {
                     <GuberCard id={guber?.id}
                         name={guber.attributes?.name}
                         rank={guber.attributes?.rank}
-                        image={guber.attributes?.img.data?.attributes?.url}
+                        image={guber.attributes?.img?.data?.attributes?.url}
                         service={guber.attributes?.service} />
                 </div>
             </div>

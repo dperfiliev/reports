@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function ReportCard({ id, image, title, source }: Props) {
-    const cutSource = (source && (source?.length > 30)) ? source.substring(0, 30) + "..." : source
 
     return (
         <Link href={`/availableReports/report/${id}`}>
@@ -18,8 +17,8 @@ export default function ReportCard({ id, image, title, source }: Props) {
                     <Image src={image ? image : "/images/no-report.jpg"} alt="img" fill sizes="30vw" className="mx-auto w-[100%] object-cover rounded-xl" />
                 </div>
                 <div className="">
-                    <h1 className="mt-1 text-blue font-bold custom-text-big">{title}</h1>
-                    <p className="mt-1 custom-text-small">{cutSource}</p>
+                    <h1 className="mt-1 text-blue font-bold custom-text-big text-balance line-clamp-2">{title}</h1>
+                    <p className="mt-1 custom-text-small line-clamp-2">{source}</p>
                 </div>
             </div>
         </Link>

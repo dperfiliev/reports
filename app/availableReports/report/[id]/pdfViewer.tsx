@@ -85,7 +85,7 @@ export default function PDFViewer({
     const { width } = entry.contentRect;
 
     if (width < 928) {
-      const margin = 48 * 2 // from padding
+      const margin = 56 * 2 // from padding
       setPageWidth(width - margin)
     } else {
       const margin = isFullscreen ? 100 * 2 : 0 // from padding
@@ -147,9 +147,9 @@ export default function PDFViewer({
   let resultText =
     searchResults.length === 1
       ? "Найдено на одной странице"
-      : `Найдено на ${searchResults.length} страницах`;
+      : `Найдено на ${searchResults?.length} страницах`;
 
-  if (searchResults.length === 0) {
+  if (searchResults?.length === 0) {
     resultText = "Ничего не найдено";
   }
 
@@ -158,7 +158,7 @@ export default function PDFViewer({
     setIsFullscreen(false)
   };
 
- 
+
   const [isTransformEnabled, setIsTransformEnabled] = useState(true);
 
   const toggleTransform = () => {
@@ -167,12 +167,20 @@ export default function PDFViewer({
 
   return (
     <div className={className}>
-      <div className="mt-4 md:mt-8 flex justify-between md:justify-end md:space-x-4 items-center custom-text-small ">
-        <p className={`${isChecked ? '' : 'font-bold'}`}>Архивный документ</p>
-        <Switch onCheckedChange={() => setIsChecked(!isChecked)} />
-        <p className={`${isChecked ? 'font-bold' : ''} text-right`}>Расшифрованный документ</p>
+
+      <div className="mt-4 md:mt-8 flex flex-shrink-0 justify-start sm:justify-end space-x-2 sm:space-x-4 items-center custom-text-small">
+        <div className='flex flex-shrink-0'>
+          <p className={`${isChecked ? '' : 'font-bold'} line-clamp-1`}>Архивный документ</p>
+        </div>
+        <div>
+          <Switch onCheckedChange={() => setIsChecked(!isChecked)} />
+        </div>
+        <div className=''>
+          <p className={`${isChecked ? 'font-bold' : ''} line-clamp-1`}>Расшифрованный документ</p>
+        </div>
       </div>
-      <div className="w-full">
+
+      <div className="w-full mt-4 md:mt-8">
         <div ref={contentRef} className="w-full">
           <Document
             file={isChecked ? file : fileSecond}
@@ -187,7 +195,7 @@ export default function PDFViewer({
               setPageNumber={setPageNumber}
             />
 
-            <div className="relative mt-6 lg:mt-4 h-fit w-full bg-pdf-reader rounded-xl overflow-hidden flex flex-col justify-center" ref={containerRef}>
+            <div className="relative mt-4 md:mt-8 lg:mt-0 h-fit w-full bg-pdf-reader rounded-xl overflow-hidden flex flex-col justify-center" ref={containerRef}>
 
               <div className="absolute top-0 w-full mt-6 flex items-start justify-between">
                 <div className="ml-6 flex items-start justify-center">
@@ -198,7 +206,7 @@ export default function PDFViewer({
 
                   <div className={isOpenSearch ? `visible` : `hidden`}>
                     <div className="mx-4 flex flex-col items-start gap-4">
-                      <Input placeholder="Найти..." value={searchString} type="" onChange={(e) => setSearchString(e.target.value)}
+                      <Input placeholder="Найти..." value={searchString} type="" onChange={(e) => setSearchString(e.target?.value)}
                         className="custom-text-button w-full" />
                       <p className="custom-text-tiny text-white italic">
                         {resultText}
@@ -211,7 +219,7 @@ export default function PDFViewer({
                   <button onClick={toggleTransform} className="relative w-4 h-4">
                     <Image src={isTransformEnabled ? '/images/text.svg' : '/images/move.svg'} alt="" fill sizes='5vw' />
                   </button>
-                  <button className='relative w-4 h-4 invisible lg:visible' onClick={handlePrint}>
+                  <button className='relative w-4 h-4 hidden lg:block' onClick={handlePrint}>
                     <Image src='/images/printer.svg' alt="" fill sizes='10vw' />
                   </button>
                   <button onClick={toggleFullscreen} className="relative w-4 h-4">

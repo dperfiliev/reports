@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function Hero() {
     return (
-        <div className="h-full w-full mt-6 md:mt-8 lg:mt-12">
+        <div className="h-full w-full mt-8 md:mt-16">
             <div className="w-full lg:w-4/5">
                 <h1 className="custom-text-huge text-nowrap">
                     ОТЧЁТЫ ГУБЕРНАТОРОВ
@@ -10,7 +10,7 @@ export default function Hero() {
                 <h1 className="sm:mt-[10px] sm:mb-[25px] font-bold text-blue custom-text-huge text-nowrap">
                     ЕНИСЕЙСКОЙ ГУБЕРНИИ
                 </h1>
-                <p className="font-lower custom-text-norm my-3 sm:my-5 leading-tight">
+                <p className="font-lower custom-text-norm my-4 leading-tight">
                     Отчёты военных губернаторов г. Красноярска и гражданских губернаторов
                     Енисейской губернии с момента основания губернии в 1822 году и до революции.
                 </p>

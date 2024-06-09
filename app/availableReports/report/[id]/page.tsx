@@ -69,7 +69,7 @@ export default async function Report({ params }: { params: { id: string } }) {
                 </ClientHydration>
             </Suspense>
 
-            <div className="mt-8">
+            <div className="mt-6 md:mt-8">
                 <AvailableReportsInfo
                     pages={dataResult.value.attributes?.pages ?? 1}
                     textType={dataResult.value.attributes?.text_type?.data?.attributes?.name}

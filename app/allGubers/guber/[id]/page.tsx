@@ -67,7 +67,7 @@ export default async function Guber({ params }: { params: { id: string } }) {
                             className="mx-auto object-cover rounded-xl"
                         />
                     </div>
-                    <div className="ml-5">
+                    <div className="ml-4 md:ml-8">
                         <h1 className="font-bold custom-text-big text-balance">
                             {dataResult.value.attributes?.service}
                         </h1>
@@ -88,7 +88,7 @@ export default async function Guber({ params }: { params: { id: string } }) {
 
 
                     {dataResult.value.attributes?.histories.map((history, id) => (
-                        <div key={id} className="flex items-start mb-4 text-justify">
+                        <div key={id} className="flex items-baseline mb-4 text-justify">
                             <h1 className="custom-text-big font-bold">
                                 {history?.year}
                             </h1>
