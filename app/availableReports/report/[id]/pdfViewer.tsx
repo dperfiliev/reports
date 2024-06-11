@@ -102,7 +102,7 @@ export default function PDFViewer({
     numPages: number;
   }) {
     setNumPages(nextNumPages);
-    setPageNumber(pageNumber)
+    setPageNumber(file == undefined ? 1: pageNumber || fileSecond == undefined ? 1: pageNumber)
   }
 
   function goToPrevPage() {
@@ -183,7 +183,7 @@ export default function PDFViewer({
       <div className="w-full mt-4 md:mt-8">
         <div ref={contentRef} className="w-full">
           <Document
-            file={isChecked ? file : fileSecond}
+            file={isChecked ? (file == undefined ? '/decrypted.pdf' : file) : (fileSecond == undefined ? '/archive.pdf' : fileSecond)}
             noData="Документ не найден."
             options={options}
             onLoadSuccess={onDocumentLoadSuccess}

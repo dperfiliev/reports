@@ -25,7 +25,7 @@ export function OneReportBreadcrumb({ reportName }: { reportName: string }) {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage className="text-blue font-bold line-clamp-1">
+                        <BreadcrumbPage className="text-blue font-bold">
                             {reportName}
                         </BreadcrumbPage>
                     </BreadcrumbItem>

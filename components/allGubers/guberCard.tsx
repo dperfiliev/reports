@@ -10,12 +10,12 @@ interface Props {
     description: string,
 }
 
-export default function GuberCard({ id, image, name, description}: Props) {
+export default function GuberCard({ id, image, name, description }: Props) {
     return (
         <div className="mb-5 cursor-pointer">
             <Link href={`/allGubers/guber/${id}`}>
                 <div className="mb-5 w-full flex items-start">
-                    <div className="relative flex-shrink-0 w-28 h-28 md:w-40 md:h-40 lg:w-52 lg:h-52 xl:h-56">
+                    <div className="relative flex-shrink-0 w-28 h-28 md:w-40 md:h-40 lg:w-52 lg:h-52 xl:w-56 xl:h-56">
                         <Image src={image ? image : "/images/none.jpg"} alt="img" fill sizes="30vw" className="mx-auto object-cover rounded-xl object-top" />
                     </div>
                     <div className="ml-5 flex flex-col">

@@ -59,9 +59,9 @@ export default async function Guber({ params }: { params: { id: string } }) {
                 </h1>
 
                 
-                <div className="mt-6 md:mt-8 lg:mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 lg:gap-6 mb-4 lg:mb-6">
+                <div className="mt-6 md:mt-8 lg:mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 mb-4 lg:gap-6 lg:mb-6">
    
-                    <div className="relative flex-shrink-0 w-full h-28 md:h-40 lg:h-52 xl:h-60">
+                    <div className="relative flex-shrink-0 w-full h-28 md:h-40 lg:h-52 xl:h-56">
                         <Image
                             src={imageUrl ? imageUrl : "/images/img1.jpg"}
                             alt="img"
@@ -87,7 +87,7 @@ export default async function Guber({ params }: { params: { id: string } }) {
                 </div>
 
                 {dataResult.value.attributes?.histories.map((history, id) => (
-                        <div key={id} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 items-start mb-4">
+                        <div key={id} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 items-start gap-4 mb-4 lg:gap-6 lg:mb-6">
                             <h1 className="custom-text-dates font-bold text-right">
                                 {history?.year}
                             </h1>
