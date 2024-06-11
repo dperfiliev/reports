@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function ReportsFindOut() {
     return (
         <div>
-            <Link href="/availableReports" className="mt-6 flex items-baseline cursor-pointer">
+            <Link href="/availableReports" className="mt-6 md:mt-8 flex items-baseline cursor-pointer">
                 <span className="text-blue font-bold custom-text-small">
                     Узнать больше
                 </span>

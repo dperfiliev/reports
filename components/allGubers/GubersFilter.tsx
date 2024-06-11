@@ -44,7 +44,7 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
 
 
     return (
-        <div className="w-fit mb-4 block lg:hidden">
+        <div className="w-fit mb-6 block lg:hidden">
             <Select disabled={isPendingPeriod} defaultValue={currentValuePeriod} value={valuePeriod} onValueChange={handleSelect}>
                 <SelectTrigger className="w-full custom-text-button">
                     <SelectValue placeholder='Период' />

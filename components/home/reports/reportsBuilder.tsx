@@ -39,8 +39,8 @@ export default async function Reports() {
                     </div>
                 ))}
             </div>
-            <HelpProject />
             <ReportsFindOut />
+            <HelpProject />
         </div>
     )
 }

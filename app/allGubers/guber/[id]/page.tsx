@@ -54,10 +54,62 @@ export default async function Guber({ params }: { params: { id: string } }) {
                 <div className="">
                     <OneGuberBreadcrumb guberName={guberName} />
                 </div>
-                <h1 className="mt-4 md:mt-8 custom-text-section uppercase">
+                <h1 className="mt-6 md:mt-8 custom-text-section uppercase">
                     {dataResult.value.attributes?.name}
                 </h1>
-                <div className="mt-4 md:mt-8 flex items-end md:items-start">
+
+                
+                <div className="mt-6 md:mt-8 lg:mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 lg:gap-6 mb-4 lg:mb-6">
+   
+                    <div className="relative flex-shrink-0 w-full h-28 md:h-40 lg:h-52 xl:h-60">
+                        <Image
+                            src={imageUrl ? imageUrl : "/images/img1.jpg"}
+                            alt="img"
+                            fill
+                            sizes="50vw"
+                            className="mx-auto object-cover rounded-xl object-top"
+                        />
+                    </div>
+    
+                    <div className="mt-2 lg:mt-4 col-span-2 sm:col-span-3 md:col-span-4">
+                        <h1 className="font-bold custom-text-big text-balance">
+                            {dataResult.value.attributes?.service}
+                        </h1>
+                        {/*
+                        <h1 className="custom-text-small text-balance">
+                            {dataResult.value.attributes?.rank}
+                        </h1>
+                        */}
+                        <p className="mt-4 lg:mt-6 custom-text-small text-pretty lg:text-justify">
+                            {dataResult.value.attributes?.description}
+                        </p>
+                    </div>
+                </div>
+
+                {dataResult.value.attributes?.histories.map((history, id) => (
+                        <div key={id} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 items-start mb-4">
+                            <h1 className="custom-text-dates font-bold text-right">
+                                {history?.year}
+                            </h1>
+                            <article className="col-span-2 sm:col-span-3 md:col-span-4 custom-text-small text-pretty lg:text-justify">
+                                {history?.text}
+                            </article>
+                        </div>
+                    ))}
+        
+
+                
+            </div>
+            <GubersAndReports guberId={params?.id} />
+        </div>
+    )
+}
+
+
+/*
+
+
+<div className="mt-4 md:mt-8 flex items-start">
                     <div className="relative flex-shrink-0 w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48">
                         <Image
                             src={imageUrl ? imageUrl : "/images/img1.jpg"}
@@ -74,15 +126,20 @@ export default async function Guber({ params }: { params: { id: string } }) {
                         <h1 className="custom-text-big">
                             {dataResult.value.attributes?.rank}
                         </h1>
-                        <p className="mt-4 custom-text-small text-justify hidden md:block">
+                        <p className="mt-4 custom-text-small text-justify">
                             {dataResult.value.attributes?.description}
                         </p>
                     </div>
 
                 </div>
+                
+                
+                
                 <p className="mt-4 custom-text-small text-justify md:hidden">
                     {dataResult.value.attributes?.description}
                 </p>
+
+                
 
                 <div className="mt-4 md:mt-8">
 
@@ -100,10 +157,6 @@ export default async function Guber({ params }: { params: { id: string } }) {
 
 
                 </div>
-            </div>
 
 
-            <GubersAndReports guberId={params?.id} />
-        </div>
-    )
-}
+*/

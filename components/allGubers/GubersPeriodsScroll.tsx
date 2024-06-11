@@ -111,6 +111,10 @@ export default function GubersPeriodsScroll({ periods, paramPeriod }: PeriodScro
     return (
         <div className="relative">
             <div className="hidden lg:flex flex-col gap-6 items-center mr-8">
+
+
+
+
                 <div className="h-52 overflow-y-auto scroll-invisible" ref={listRef}>
                     <div className="flex flex-col gap-4 pb-52 custom-text-norm">
                         {periods.map((period) => (
@@ -129,6 +133,16 @@ export default function GubersPeriodsScroll({ periods, paramPeriod }: PeriodScro
                         ))}
                     </div>
                 </div>
+
+                <div className="flex items-center">
+                <button className="w-5 h-5 ">
+                ▲
+                </button>
+                <button className="w-5 h-5 rotate-180">
+                ▲
+                </button>
+                </div>
+
             </div>
         </div>
     );

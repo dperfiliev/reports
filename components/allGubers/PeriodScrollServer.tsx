@@ -1,9 +1,10 @@
 import getPeriods from "@/lib/queries/getPeriods"
-import GubersPeriodsScroll from "./GubersPeriodsScroll"
+//import GubersPeriodsScroll from "./GubersPeriodsScroll"
+import GubersPeriodClicks from "./GubersPeriodClicks"
 
 export default async function PeriodScrollServer() {
     const [dataResult] = await Promise.allSettled([
-        getPeriods({})
+        getPeriods({ pageSize: 999 })
     ])
 
     if (dataResult.status === "rejected") {
@@ -15,6 +16,7 @@ export default async function PeriodScrollServer() {
     }
 
     return (
-        <GubersPeriodsScroll periods={dataResult?.value} paramPeriod="period"/>
+        //<GubersPeriodsScroll periods={dataResult?.value} paramPeriod="period"/>
+        <GubersPeriodClicks periods={dataResult?.value} paramPeriod="period"/>
     )
 }

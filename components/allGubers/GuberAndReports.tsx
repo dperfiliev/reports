@@ -6,7 +6,7 @@ import getGuberAndReports from "@/lib/queries/getGuberAndReports"
 export default async function GubersAndReports({guberId}: {guberId: string}) {
 
     const [dataResult] = await Promise.allSettled([
-        getGuberAndReports({ guberId : guberId })
+        getGuberAndReports({ pageSize: 999, guberId : guberId })
     ])
 
     if (dataResult.status === "rejected") {

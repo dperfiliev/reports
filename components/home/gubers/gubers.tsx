@@ -8,7 +8,7 @@ export default function Gubers(){
 
     return(
         <div className="mt-8 md:mt-16">
-            <div className="mb-3">
+            <div className="mb-2 md:mb-4">
                 <h1 className="custom-text-section">
                     ГУБЕРНАТОРЫ ЕНИСЕЙСКОЙ ГУБЕРНИИ
                 </h1>

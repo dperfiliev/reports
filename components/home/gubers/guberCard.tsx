@@ -14,8 +14,8 @@ export default function GuberCard({ id, image, name, rank, service }: Props) {
         <Link href={`/allGubers/guber/${id}`}>
             <div className="flex flex-col justify-top gap-3 cursor-pointer h-full bg-white p-2 md:p-4 rounded-2xl shadow-gray-200 shadow-md hover:shadow-gray-400 transition-all">
                 <h1 className="font-bold custom-text-big line-clamp-3">{service}</h1>
-                <div className="relative w-full h-28 md:h-36 lg:h-44">
-                    <Image src={image ? image : "/images/none.jpg"} alt="img" fill sizes="30vw" className="mx-auto w-[100%] object-cover rounded-xl" />
+                <div className="relative w-full h-36 sm:h-52 md:h-40 lg:h-52 xl:h-56">
+                    <Image src={image ? image : "/images/none.jpg"} alt="img" fill sizes="30vw" className="mx-auto object-cover rounded-xl object-top" />
                 </div>
                 <div>
                     <h1 className="text-blue font-bold custom-text-big">{name?.substring(0, name?.indexOf(" "))} </h1>

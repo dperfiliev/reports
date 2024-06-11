@@ -21,7 +21,7 @@ export default function AllGubers({ searchParams }: { searchParams: { [key: stri
             <h1 className="mt-6 md:mt-8 custom-text-section">
                 ГУБЕРНАТОРЫ ЕНИСЕЙСКОЙ ГУБЕРНИИ
             </h1>
-            <div className="mt-4 md:mt-8 lg:flex">
+            <div className="mt-6 md:mt-8 lg:flex">
                 <Suspense>
                     <GubersFilter paramPeriod="period">
                         <PeriodSelectServer />

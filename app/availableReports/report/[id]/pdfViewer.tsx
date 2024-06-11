@@ -102,7 +102,7 @@ export default function PDFViewer({
     numPages: number;
   }) {
     setNumPages(nextNumPages);
-    setPageNumber(1)
+    setPageNumber(pageNumber)
   }
 
   function goToPrevPage() {
@@ -168,7 +168,7 @@ export default function PDFViewer({
   return (
     <div className={className}>
 
-      <div className="mt-4 md:mt-8 flex flex-shrink-0 justify-start sm:justify-end space-x-2 sm:space-x-4 items-center custom-text-small">
+      <div className="mt-6 md:mt-8 flex flex-shrink-0 justify-start sm:justify-end space-x-2 sm:space-x-4 items-center custom-text-small">
         <div className='flex flex-shrink-0'>
           <p className={`${isChecked ? '' : 'font-bold'} line-clamp-1`}>Архивный документ</p>
         </div>

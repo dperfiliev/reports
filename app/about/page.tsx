@@ -16,11 +16,11 @@ export default function About() {
                 <div>
                     <AboutBreadcrumb />
                 </div>
-                <h1 className="mt-4 md:mt-8 custom-text-section">
+                <h1 className="mt-6 md:mt-8 custom-text-section">
                     О ПРОЕКТЕ
                 </h1>
                 <div className="text-justify">
-                    <p className="mt-4 md:mt-8 custom-text-small">
+                    <p className="mt-6 md:mt-8 custom-text-small">
                         Официальные отчёты губернаторов Енисейской губернии XVIII и XIX века.
                         В этих документах содержится важная информация о городах, организациях и людях, которые жили в регионе.
                     </p>

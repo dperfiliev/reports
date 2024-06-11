@@ -54,7 +54,7 @@ export default async function Report({ params }: { params: { id: string } }) {
             <div>
                 <OneReportBreadcrumb reportName={dataResult.value?.attributes?.title ?? "Неизвестно"} />
             </div>
-            <h1 className="mt-4 md:mt-8 custom-text-section uppercase">
+            <h1 className="mt-6 md:mt-8 custom-text-section uppercase">
                 {dataResult.value.attributes?.title}
             </h1>
 

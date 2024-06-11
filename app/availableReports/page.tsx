@@ -35,7 +35,7 @@ export default function AvailableReports({
                     ДОСТУПНЫЕ ОТЧЁТЫ
                 </h1>
 
-                <div className="mt-4 md:mt-8 flex space-x-2">
+                <div className="mt-6 md:mt-8 flex space-x-2">
 
                     <Suspense>
                         <ReportsFilter

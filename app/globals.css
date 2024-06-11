@@ -60,7 +60,7 @@
 }
 
 .custom-text-button{
-  @apply font-upper text-xs md:text-sm lg:text-base
+  @apply text-xs md:text-sm lg:text-base font-upper;
 }
 
 .custom-text-norm {
@@ -69,6 +69,10 @@
 
 .custom-text-big {
   @apply text-[13px] md:text-base lg:text-lg font-upper;
+}
+
+.custom-text-dates {
+  @apply text-xl md:text-2xl lg:text-2xl font-lower;
 }
 
 .custom-text-section {

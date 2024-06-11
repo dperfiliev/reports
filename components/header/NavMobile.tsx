@@ -38,7 +38,7 @@ export default function NavMobile() {
   return (  
     <div className="sm:hidden flex items-center">
       <Drawer direction="right" open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerTrigger className="relative w-7 h-7" onClick={() => setIsOpen(true)}>
+        <DrawerTrigger className="relative w-7 h-7 text-blue" onClick={() => setIsOpen(true)}>
           <Image src={"/images/hamburger.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover" />
         </DrawerTrigger>
         <DrawerContent className="flex flex-col items-center justify-center sm:hidden">
@@ -65,8 +65,8 @@ export default function NavMobile() {
               }
             </div>
 
-              <div className="relative mb-4 h-60 w-60">
-                <Image src={"/images/bg.png"} alt="img" fill sizes="50vw" priority={true} className="" />
+              <div className="relative mb-4 h-[25vh] w-[25vh]">
+                <Image src={"/images/bg.png"} alt="img" fill sizes="80vw" priority={true} className="" />
               </div>
           </div>
 

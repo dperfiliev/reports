@@ -12,7 +12,7 @@ export default function Hero() {
                 </h1>
                 <p className="font-lower custom-text-norm my-4 leading-tight">
                     Отчёты военных губернаторов г. Красноярска и гражданских губернаторов
-                    Енисейской губернии с момента основания губернии в 1822 году и до революции.
+                    Енисейской губернии с момента основания губернии в 1822 году и до революции
                 </p>
             </div>
             <div className="relative w-full h-44 sm:h-80 md:h-[350px]">
