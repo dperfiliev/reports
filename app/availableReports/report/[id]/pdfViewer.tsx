@@ -102,7 +102,12 @@ export default function PDFViewer({
     numPages: number;
   }) {
     setNumPages(nextNumPages);
-    setPageNumber(file == undefined ? 1: pageNumber || fileSecond == undefined ? 1: pageNumber)
+    setPageNumber(file == undefined ? 1: pageNumber && fileSecond == undefined ? 1: pageNumber)
+    //setPageNumber(pageNumber)
+
+    console.log(file == undefined)
+    console.log(fileSecond == undefined)
+
   }
 
   function goToPrevPage() {

@@ -68,7 +68,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
 
     return (
         <div className="hidden lg:flex flex-col gap-2 items-center mr-8">
-            <button onClick={handleScrollUp} className="relative w-4 h-4">
+            <button onClick={handleScrollUp} className="relative w-3 h-3">
 
                 <Image src='/images/arrow-scroll.svg' alt="" fill sizes='10vw' />
                 
@@ -91,7 +91,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
                 </div>
             </div>
 
-            <button onClick={handleScrollDown} className="relative w-4 h-4">
+            <button onClick={handleScrollDown} className="relative w-3 h-3">
               
                 <Image src='/images/arrow-scroll.svg' alt="" fill sizes='10vw' className="rotate-180"/>
             </button>
