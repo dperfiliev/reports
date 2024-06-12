@@ -42,7 +42,7 @@ export default function NavMobile() {
           <Image src={"/images/hamburger.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover" />
         </DrawerTrigger>
         <DrawerContent className="flex flex-col items-center justify-center sm:hidden">
-          <DrawerClose className="relative w-10 h-10 self-end mr-5" onClick={() => setIsOpen(false)}>
+          <DrawerClose className="relative shrink-0 w-10 h-10 self-end mr-5" onClick={() => setIsOpen(false)}>
             <Image src={"/images/cross.svg"} alt="img" fill sizes="1vw" priority={true} className="mx-auto object-cover" />
           </DrawerClose>
           <DrawerHeader>
@@ -50,7 +50,7 @@ export default function NavMobile() {
             <DrawerDescription></DrawerDescription>
           </DrawerHeader>
 
-          <div className="h-screen flex flex-col justify-evenly">
+          <div className="h-screen flex flex-col items-center justify-evenly">
             <div className="flex flex-col items-center gap-8">
               {
                 navs.map((item) => (
@@ -65,7 +65,7 @@ export default function NavMobile() {
               }
             </div>
 
-              <div className="relative mb-4 h-[25vh] w-[25vh]">
+              <div className="relative mb-4 h-[20vh] w-[20vh]">
                 <Image src={"/images/bg.png"} alt="img" fill sizes="80vw" priority={true} className="" />
               </div>
           </div>

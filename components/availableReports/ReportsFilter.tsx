@@ -186,7 +186,7 @@ export function ReportsFilter({
 
         <div className={valueSource === undefined || valueSource === "" ? "hidden" : "block mt-4 mr-2"}>
           <div className="flex items-center justify-center w-72 sm:w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
-            <p className="custom-text-small ml-2 text-nowrap overflow-hidden">
+            <p className="custom-text-small ml-2 text-nowrap line-clamp-1">
               {valueSource}
             </p>
             <Button className="relative h-4" onClick={handleSourceReset}>

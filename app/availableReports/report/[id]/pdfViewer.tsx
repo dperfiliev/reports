@@ -104,10 +104,6 @@ export default function PDFViewer({
     setNumPages(nextNumPages);
     setPageNumber(file == undefined ? 1: pageNumber && fileSecond == undefined ? 1: pageNumber)
     //setPageNumber(pageNumber)
-
-    console.log(file == undefined)
-    console.log(fileSecond == undefined)
-
   }
 
   function goToPrevPage() {
@@ -159,8 +155,7 @@ export default function PDFViewer({
   }
 
   const handlePrint = () => {
-    printJS({ printable: isChecked ? file : fileSecond, type: 'pdf', showModal: false });
-    setIsFullscreen(false)
+    printJS({ printable: isChecked ? (file == undefined ? '/decrypted.pdf' : file) : (fileSecond == undefined ? '/archive.pdf' : fileSecond), type: 'pdf', showModal: false });
   };
 
 
@@ -192,7 +187,7 @@ export default function PDFViewer({
             noData="Документ не найден."
             options={options}
             onLoadSuccess={onDocumentLoadSuccess}
-            loading={<Loader2 className="mx-auto animate-spin w-6 h-8" />}
+            loading={<Loader2 className="mx-auto my-56 md:my-72 lg:my-20 animate-spin w-6 h-6" />}
             className="w-full mt-4 lg:flex lg:space-x-7 items-start justify-center custom-text-small"
           >
             <OutlineContent
@@ -206,7 +201,7 @@ export default function PDFViewer({
                 <div className="ml-6 flex items-start justify-center">
                   <button onClick={toggleSearchInput}
                     className='relative w-4 h-4'>
-                    <Image src='/images/glass.svg' alt="" fill sizes='10vw' />
+                    <Image src='/images/glass.svg' alt="" fill sizes='10vw' priority={true}/>
                   </button>
 
                   <div className={isOpenSearch ? `visible` : `hidden`}>
@@ -222,13 +217,13 @@ export default function PDFViewer({
 
                 <div className="mr-6 flex items-center space-x-4">
                   <button onClick={toggleTransform} className="relative w-4 h-4">
-                    <Image src={isTransformEnabled ? '/images/text.svg' : '/images/move.svg'} alt="" fill sizes='5vw' />
+                    <Image src={isTransformEnabled ? '/images/text.svg' : '/images/move.svg'} alt="" fill sizes='5vw' priority={true}/>
                   </button>
                   <button className='relative w-4 h-4 hidden lg:block' onClick={handlePrint}>
-                    <Image src='/images/printer.svg' alt="" fill sizes='10vw' />
+                    <Image src='/images/printer.svg' alt="" fill sizes='10vw' priority={true}/>
                   </button>
-                  <button onClick={toggleFullscreen} className="relative w-4 h-4">
-                    <Image src={isFullscreen ? '/images/minimize.svg' : '/images/resize.svg'} alt="" fill sizes='5vw' />
+                  <button onClick={toggleFullscreen} className="hidden lg:block relative w-4 h-4">
+                    <Image src={isFullscreen ? '/images/minimize.svg' : '/images/resize.svg'} alt="" fill sizes='5vw' priority={true}/>
                   </button>
                 </div>
 
@@ -236,7 +231,7 @@ export default function PDFViewer({
 
               <div className={isFullscreen ? `flex items-center justify-center` : isOpenSearch ? `mt-24 flex items-center justify-center` : `mt-12 flex items-center justify-center`}>
                 <button className='relative w-4 h-4 shrink-0' onClick={goToPrevPage}>
-                  <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' className="rotate-180" />
+                  <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' className="rotate-180" priority={true}/>
                 </button>
                 <div className="flex flex-col p-4">
                   {isTransformEnabled ? (
@@ -249,7 +244,7 @@ export default function PDFViewer({
                           renderTextLayer={true}
                           customTextRenderer={textRenderer}
                           width={pageWidth}
-                          loading={<Loader2 className="animate-spin w-6 h-8" />}
+                          loading={<Loader2 className="animate-spin w-6 h-6" />}
                         />
                       </TransformComponent>
                     </TransformWrapper>
@@ -261,14 +256,14 @@ export default function PDFViewer({
                       renderTextLayer
                       customTextRenderer={textRenderer}
                       width={pageWidth}
-                      loading={<Loader2 className="animate-spin w-6 h-8" />}
+                      loading={<Loader2 className="animate-spin w-6 h-6" />}
                     />
                   )}
 
                   <Progress value={pageNumber} className="mt-4 w-full h-2" />
                 </div>
                 <button className='relative w-4 h-4 shrink-0' onClick={goToNextPage}>
-                  <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' />
+                  <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' priority={true}/>
                 </button>
               </div>
 

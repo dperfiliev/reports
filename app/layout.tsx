@@ -52,6 +52,7 @@ export default function RootLayout({
        <head>
         <link rel="icon" href="/images/icons/favicon-darkTheme.ico" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/images/icons/favicon-lightTheme.ico" media="(prefers-color-scheme: light)" />
+        <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=4" sizes="<generated>"/>
       </head>
       <body className={`${Involve.variable} ${DejaVu.variable} scroll-smooth flex flex-col items-start overflow-x-hidden`}>
           <BgFixed/>

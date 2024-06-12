@@ -53,7 +53,7 @@ export default function AvailableReports({
                     </Suspense >
 
                 </div>
-                <Suspense key={`source=${source} period=${period} textType=${textType}`} fallback={<Loader2 className="mx-auto animate-spin w-6 h-8" />}>
+                <Suspense key={`source=${source} period=${period} textType=${textType}`} fallback={<Loader2 className="mx-auto animate-spin w-6 h-6" />}>
                     <AvailableReportsBuilder searchParams={searchParams} />
                 </Suspense>
             </div>

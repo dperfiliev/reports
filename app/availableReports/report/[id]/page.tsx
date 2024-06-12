@@ -33,7 +33,7 @@ export async function generateMetadata(
 }
 
 
-const PDFViewer = dynamic(() => import('./pdfViewer'), { loading: () => <Loader2 className="mx-auto animate-spin w-8 h-8" />, ssr: false })
+const PDFViewer = dynamic(() => import('./pdfViewer'), { loading: () => <Loader2 className="mx-auto animate-spin w-6 h-6" />, ssr: false })
 
 export default async function Report({ params }: { params: { id: string } }) {
 
@@ -60,11 +60,11 @@ export default async function Report({ params }: { params: { id: string } }) {
 
 
             <Script src="/pdf.worker.min.js" />
-            <Suspense fallback={<Loader2 className="mx-auto animate-spin w-8 h-8" />}>
-                <ClientHydration fallback={<Loader2 className="mx-auto animate-spin w-8 h-8" />}>
+            <Suspense fallback={<Loader2 className="mx-auto animate-spin w-6 h-6" />}>
+                <ClientHydration fallback={<Loader2 className="my-12 mx-auto animate-spin w-6 h-6" />}>
                     <PDFViewer 
-                    file={dataResult.value?.attributes?.file.data?.attributes.url} contents={dataResult.value.attributes?.contents} 
-                    fileSecond={dataResult.value?.attributes?.fileSecond.data?.attributes.url} contentsSecond={dataResult.value.attributes?.contentsSecond}
+                    file={dataResult.value?.attributes?.file.data?.attributes?.url} contents={dataResult.value.attributes?.contents} 
+                    fileSecond={dataResult.value?.attributes?.fileSecond.data?.attributes?.url} contentsSecond={dataResult.value.attributes?.contentsSecond}
                     />
                 </ClientHydration>
             </Suspense>

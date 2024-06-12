@@ -98,11 +98,11 @@
 }
 
 .scroll-invisible {
-  scrollbar-width: none; /* Для Firefox */
-  -ms-overflow-style: none;  /* Для IE и Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;  
 }
 
 .scroll-invisible::-webkit-scrollbar {
-  display: none; /* Для Chrome, Safari и Opera */
+  display: none; 
 }
 
