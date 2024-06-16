@@ -4,7 +4,7 @@ import React from 'react';
 import { usePdfTextSearch } from "@/lib/usePdfTextSearch";
 import useResizeObserver from "@react-hook/resize-observer";
 import { Loader2 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { pdfjs, Document, Page } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.min.js`;
@@ -51,33 +51,6 @@ export default function PDFViewer({
   const [debouncedSearchString] = useDebounce(searchString, 250);
   const searchResults = usePdfTextSearch(isChecked ? file ?? "" : fileSecond ?? "", debouncedSearchString);
 
-  // Full screen
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const toggleFullscreen = () => {
-    if (!isFullscreen) {
-      if (containerRef.current) {
-        void containerRef.current.requestFullscreen();
-      }
-    } else {
-      void document.exitFullscreen();
-    }
-    setIsFullscreen(!isFullscreen);
-  };
-
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-    };
-  }, []);
-
   const contentRef = useRef(null);
   const [pageWidth, setPageWidth] = useState(0);
 
@@ -85,10 +58,10 @@ export default function PDFViewer({
     const { width } = entry.contentRect;
 
     if (width < 928) {
-      const margin = 56 * 2 // from padding
+      const margin = 40 * 2 // from padding
       setPageWidth(width - margin)
     } else {
-      const margin = isFullscreen ? 100 * 2 : 0 // from padding
+      const margin = 0 // from padding
       const halfWidth = (width) / 1.8 // with gap: 32px
       setPageWidth(halfWidth - margin)
     }
@@ -107,10 +80,12 @@ export default function PDFViewer({
   }
 
   function goToPrevPage() {
+    setIsLoading(true)
     setPageNumber(prevPage => prevPage > 1 ? prevPage - 1 : 1);
   }
 
   function goToNextPage() {
+    setIsLoading(true)
     setPageNumber(prevPage => prevPage < numPages ? prevPage + 1 : numPages);
   }
 
@@ -158,12 +133,23 @@ export default function PDFViewer({
     printJS({ printable: isChecked ? (file == undefined ? '/decrypted.pdf' : file) : (fileSecond == undefined ? '/archive.pdf' : fileSecond), type: 'pdf', showModal: false });
   };
 
-
   const [isTransformEnabled, setIsTransformEnabled] = useState(true);
 
   const toggleTransform = () => {
     setIsTransformEnabled(!isTransformEnabled);
   };
+
+
+  const handleOpenPDF = () => {
+    const pdfFile = isChecked ? (file || '/decrypted.pdf') : (fileSecond || '/archive.pdf');
+    window.open(pdfFile, '_blank');
+  };
+
+  const loadedPage = () => {
+    setIsLoading(false)
+  }
+
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <div className={className}>
@@ -195,19 +181,19 @@ export default function PDFViewer({
               setPageNumber={setPageNumber}
             />
 
-            <div className="relative mt-4 md:mt-8 lg:mt-0 h-fit w-full bg-pdf-reader rounded-xl overflow-hidden flex flex-col justify-center" ref={containerRef}>
+            <div className="relative mt-4 md:mt-8 lg:mt-0 h-fit w-full bg-pdf-reader rounded-xl overflow-hidden flex flex-col justify-center">
 
-              <div className="absolute top-0 w-full mt-6 flex items-start justify-between">
-                <div className="ml-6 flex items-start justify-center">
+              <div className="absolute top-0 w-full mt-3 lg:mt-6 flex items-start justify-between">
+                <div className="ml-3 lg:ml-6 flex items-start justify-center">
                   <button onClick={toggleSearchInput}
                     className='relative w-4 h-4'>
                     <Image src='/images/glass.svg' alt="" fill sizes='10vw' priority={true}/>
                   </button>
 
                   <div className={isOpenSearch ? `visible` : `hidden`}>
-                    <div className="mx-4 flex flex-col items-start gap-4">
+                    <div className="mx-3 flex flex-col items-start">
                       <Input placeholder="Найти..." value={searchString} type="" onChange={(e) => setSearchString(e.target?.value)}
-                        className="custom-text-button w-full" />
+                        className="custom-text-button w-full mb-3" />
                       <p className="custom-text-tiny text-white italic">
                         {resultText}
                       </p>
@@ -215,25 +201,27 @@ export default function PDFViewer({
                   </div>
                 </div>
 
-                <div className="mr-6 flex items-center space-x-4">
+                <div className="mr-3 lg:mr-6 flex items-center space-x-4">
                   <button onClick={toggleTransform} className="relative w-4 h-4">
                     <Image src={isTransformEnabled ? '/images/text.svg' : '/images/move.svg'} alt="" fill sizes='5vw' priority={true}/>
                   </button>
                   <button className='relative w-4 h-4 hidden lg:block' onClick={handlePrint}>
                     <Image src='/images/printer.svg' alt="" fill sizes='10vw' priority={true}/>
                   </button>
-                  <button onClick={toggleFullscreen} className="hidden lg:block relative w-4 h-4">
-                    <Image src={isFullscreen ? '/images/minimize.svg' : '/images/resize.svg'} alt="" fill sizes='5vw' priority={true}/>
+
+                  <button onClick={handleOpenPDF} className="relative w-4 h-4">
+                    <Image src='/images/open-in-new.svg' alt="" fill sizes='5vw' priority={true}/>
                   </button>
+
                 </div>
 
               </div>
 
-              <div className={isFullscreen ? `flex items-center justify-center` : isOpenSearch ? `mt-24 flex items-center justify-center` : `mt-12 flex items-center justify-center`}>
-                <button className='relative w-4 h-4 shrink-0' onClick={goToPrevPage}>
+              <div className={`flex items-center justify-center ${isOpenSearch ? 'mt-20 lg:mt-24' : 'mt-6 lg:mt-12'}`}>
+                <button className={`relative w-4 h-4 mx-auto shrink-0 ${isLoading ? 'opacity-10 cursor-not-allowed' : ''}`} onClick={goToPrevPage}>
                   <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' className="rotate-180" priority={true}/>
                 </button>
-                <div className="flex flex-col p-4">
+                <div className="flex flex-col pt-4 mb-3 lg:mb-6">
                   {isTransformEnabled ? (
                     <TransformWrapper>
                       <TransformComponent>
@@ -245,6 +233,7 @@ export default function PDFViewer({
                           customTextRenderer={textRenderer}
                           width={pageWidth}
                           loading={<Loader2 className="animate-spin w-6 h-6" />}
+                          onRenderSuccess={loadedPage}
                         />
                       </TransformComponent>
                     </TransformWrapper>
@@ -257,12 +246,13 @@ export default function PDFViewer({
                       customTextRenderer={textRenderer}
                       width={pageWidth}
                       loading={<Loader2 className="animate-spin w-6 h-6" />}
+                      onRenderSuccess={loadedPage}
                     />
                   )}
 
-                  <Progress value={pageNumber} className="mt-4 w-full h-2" />
+                  <Progress value={pageNumber} className="mt-3 w-full h-2" />
                 </div>
-                <button className='relative w-4 h-4 shrink-0' onClick={goToNextPage}>
+                <button className={`relative w-4 h-4 mx-auto shrink-0 ${isLoading ? 'opacity-10 cursor-not-allowed' : ''}`} onClick={goToNextPage}>
                   <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' priority={true}/>
                 </button>
               </div>
