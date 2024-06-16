@@ -80,12 +80,12 @@ export default function PDFViewer({
   }
 
   function goToPrevPage() {
-    setIsLoading(true)
+    //setIsLoading(true)
     setPageNumber(prevPage => prevPage > 1 ? prevPage - 1 : 1);
   }
 
   function goToNextPage() {
-    setIsLoading(true)
+    //setIsLoading(true)
     setPageNumber(prevPage => prevPage < numPages ? prevPage + 1 : numPages);
   }
 
@@ -145,11 +145,15 @@ export default function PDFViewer({
     window.open(pdfFile, '_blank');
   };
 
+  /*
+  
   const loadedPage = () => {
-    setIsLoading(false)
-  }
+      setIsLoading(false)
+    }
 
-  const [isLoading, setIsLoading] = useState(false)
+  */
+
+  //const [isLoading, setIsLoading] = useState(false)
 
   return (
     <div className={className}>
@@ -218,7 +222,7 @@ export default function PDFViewer({
               </div>
 
               <div className={`flex items-center justify-center ${isOpenSearch ? 'mt-20 lg:mt-24' : 'mt-6 lg:mt-12'}`}>
-                <button className={`relative w-4 h-4 mx-auto shrink-0 ${isLoading ? 'opacity-10 cursor-not-allowed' : ''}`} onClick={goToPrevPage}>
+                <button className={`relative w-4 h-4 mx-auto shrink-0`} onClick={goToPrevPage}>
                   <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' className="rotate-180" priority={true}/>
                 </button>
                 <div className="flex flex-col pt-4 mb-3 lg:mb-6">
@@ -233,7 +237,7 @@ export default function PDFViewer({
                           customTextRenderer={textRenderer}
                           width={pageWidth}
                           loading={<Loader2 className="animate-spin w-6 h-6" />}
-                          onRenderSuccess={loadedPage}
+                          //onRenderSuccess={loadedPage}
                         />
                       </TransformComponent>
                     </TransformWrapper>
@@ -246,13 +250,13 @@ export default function PDFViewer({
                       customTextRenderer={textRenderer}
                       width={pageWidth}
                       loading={<Loader2 className="animate-spin w-6 h-6" />}
-                      onRenderSuccess={loadedPage}
+                      //onRenderSuccess={loadedPage}
                     />
                   )}
 
                   <Progress value={pageNumber} className="mt-3 w-full h-2" />
                 </div>
-                <button className={`relative w-4 h-4 mx-auto shrink-0 ${isLoading ? 'opacity-10 cursor-not-allowed' : ''}`} onClick={goToNextPage}>
+                <button className={`relative w-4 h-4 mx-auto shrink-0`} onClick={goToNextPage}>
                   <Image src='/images/right-arrow.svg' alt="" fill sizes='10vw' priority={true}/>
                 </button>
               </div>
@@ -264,3 +268,6 @@ export default function PDFViewer({
     </div>
   );
 }
+
+
+//${isLoading ? 'opacity-10 cursor-not-allowed' : ''}
