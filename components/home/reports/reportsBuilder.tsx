@@ -7,7 +7,7 @@ import getReports from "@/lib/queries/getReports"
 export default async function Reports() {
 
     const [dataResult] = await Promise.allSettled([
-        getReports({ pageSize: 8 })
+        getReports({ pageSize: 105 })
     ])
 
     if (dataResult.status === "rejected") {

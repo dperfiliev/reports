@@ -24,6 +24,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 204 100% 27%;
     --radius: 0.5rem;
+    --blue: #00538A;
+    --pdf: #303030;
   }
 
   .dark {
@@ -83,7 +85,6 @@
   @apply text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-upper;
 }
 
-
 .gubers-scroll > div {
   display: block !important;
 }
@@ -94,7 +95,7 @@
 }
 
 .header-shadow{
-  box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 4px -4px #A3A3A3;
 }
 
 .scroll-invisible {
@@ -104,5 +105,42 @@
 
 .scroll-invisible::-webkit-scrollbar {
   display: none; 
+}
+
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  padding-left: 6px;
+  background: #ffffff;
+  border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 4px;
+}
+
+/*
+  .custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue) #ffffff;
+  border-radius: 4px;
+}
+  */
+
+@keyframes typing {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.typing-animation::after {
+  content: '...';
+  display: inline-block;
+  animation: typing 1.5s steps(3, end) infinite;
 }
 

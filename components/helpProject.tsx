@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function HelpProject() {
     return (
-        <div className="relative mt-6 md:mt-8 flex items-center bg-white shadow-gray-200 shadow-md rounded-xl">
+        <div className="relative mt-6 md:mt-8 flex items-center bg-white shadow-neutral-300 shadow-md rounded-xl">
             <div className="absolute z-10">
                 <div className="px-2 md:p-4">
                     <div>
@@ -25,7 +25,7 @@ export default function HelpProject() {
                 </div>
             </div>
             <div className="relative w-full h-64 sm:h-52 md:h-60 z-0 overflow-hidden rounded-xl">
-                <Image src="/images/bg-help.jpg" alt="" fill sizes="100vw" className="object-cover object-[0%_40%] scale-150 opacity-10" />
+                <Image src="/images/bg-help.jpg" alt="" fill sizes="100vw" className="object-cover object-[0%_40%] scale-150 opacity-20" />
             </div>
         </div>
     )

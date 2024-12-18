@@ -6,7 +6,9 @@ const nextConfig = {
     eslint: { ignoreDuringBuilds: true },
     env: {
         NEXT_PUBLIC_CMS_API_URL: process.env.NEXT_PUBLIC_CMS_API_URL,
-        NEXT_PUBLIC_CMS_DOMAIN: process.env.NEXT_PUBLIC_CMS_DOMAIN
+        NEXT_PUBLIC_CMS_DOMAIN: process.env.NEXT_PUBLIC_CMS_DOMAIN,
+        NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+        RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
     },
     images: {
         remotePatterns: [
@@ -29,6 +31,7 @@ const nextConfig = {
         
           return config;
          },
+         
 };
 
 module.exports = nextConfig;

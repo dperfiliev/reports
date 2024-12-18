@@ -1,6 +1,41 @@
+
+"use client"
+
+import { useState, useEffect } from "react";
 import Image from "next/image"
 
+
 export default function Hero() {
+
+    const images = [
+        "/images/hero_1.jpg",
+        "/images/hero_2.jpg",
+        "/images/hero_3.jpg",
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 5000); // Автопролистывание каждые 3 секунды
+
+        return () => clearInterval(interval);
+    }, [images.length]);
+
+    const handleIndicatorClick = (index: number) => {
+        setCurrentIndex(index);
+    };
+
+    const handlePrevClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
+
+    const handleNextClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    };
+
+
     return (
         <div className="h-full w-full mt-8 md:mt-16">
             <div className="w-full lg:w-4/5">
@@ -16,7 +51,41 @@ export default function Hero() {
                 </p>
             </div>
             <div className="relative w-full h-44 sm:h-80 md:h-[350px]">
-                <Image src="/images/hero.jpg" alt="hero" fill sizes="100vw" className="rounded-xl object-cover" />
+                <button
+                    className="absolute left-0 top-0 h-full w-1/2 bg-transparent z-10"
+                    onClick={handlePrevClick}
+
+                ></button>
+                <button
+                    className="absolute right-0 top-0 h-full w-1/2 bg-transparent z-10"
+                    onClick={handleNextClick}
+
+                ></button>
+                <div className="relative w-full h-full">
+                    {images.map((src, index) => (
+                        <Image
+                            key={index}
+                            src={src}
+                            alt="hero"
+                            fill
+                            sizes="100vw"
+                            className={`absolute rounded-xl top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                        />
+                    ))}
+                </div>
+                <div className="absolute z-20 bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-4">
+                    {images.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`w-2 h-2 md:w-3 md:h-3 rounded-full cursor-pointer ${index === currentIndex ? 'bg-blue' : 'bg-white'
+                                }`}
+                            onClick={() => handleIndicatorClick(index)}
+                        ></div>
+                    ))}
+                </div>
+
+
+
             </div>
         </div>
     )

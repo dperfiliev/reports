@@ -9,7 +9,7 @@ export default async function SourceSelectServer() {
 
 
     const [dataResult] = await Promise.allSettled([
-        getSources({ pageSize: 999 })
+        getSources({ pageSize: 300 })
     ])
 
     if (dataResult.status === "rejected") {

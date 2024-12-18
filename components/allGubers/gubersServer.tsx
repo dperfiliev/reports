@@ -8,7 +8,7 @@ export default async function GubersServer({ searchParams }: {searchParams: { [k
     const startsWith = searchParams["StartsWith"] as string | undefined
     
     const [dataResult] = await Promise.allSettled([
-        getGubersFiltered({ pageSize: 999, period: period, startsWith: startsWith })
+        getGubersFiltered({ pageSize: 100, period: period, startsWith: startsWith })
     ])
 
     if (dataResult.status === "rejected") {

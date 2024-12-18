@@ -21,6 +21,7 @@ const config = {
       colors: {
         'blue': '#00538A',
         'pdf-reader': '#303030',
+        'back': '#FAF9F7',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Header from "@/components/header/header";
+
+import AIHelper from "@/components/AIHelper";
+
 import Footer from "@/components/footer";
 import BgFixed from "@/components/bgfixed";
 
@@ -9,9 +12,9 @@ import BgFixed from "@/components/bgfixed";
 import CustomFont from 'next/font/local'
 
 const Involve = CustomFont({
-    src: "../public/fonts/Involve-Regular.ttf",
-    variable: '--font-Involve'
-  })
+  src: "../public/fonts/Involve-Regular.ttf",
+  variable: '--font-Involve'
+})
 
 const DejaVu = CustomFont(
   {
@@ -49,21 +52,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-       <head>
+      <head>
         <link rel="icon" href="/images/icons/favicon-darkTheme.ico" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/images/icons/favicon-lightTheme.ico" media="(prefers-color-scheme: light)" />
-        <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=4" sizes="<generated>"/>
+        <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=4" sizes="<generated>" />
       </head>
-      <body className={`${Involve.variable} ${DejaVu.variable} scroll-smooth flex flex-col items-start overflow-x-hidden`}>
-          <BgFixed/>
-          <Header />
+      <body className={`${Involve.variable} ${DejaVu.variable} scroll-smooth flex flex-col items-start overflow-x-hidden bg-back`}>
+        {/*
+        <BgFixed />
+        */}
+        <Header />
 
-          <div className="relative container mx-auto px-4 md:px-12 min-h-screen">
-            {children}
-          </div>
-
+        <div className="relative container flex flex-col justify-between mx-auto px-4 md:px-12 min-h-screen md:shadow-neutral-300 md:shadow-md bg-white">
+          {children}
           <Footer />
-        </body>
+        </div>
+        <AIHelper />
+      </body>
     </html>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Footer(){
     return(
-        <div className="relative mt-8 md:mt-16 mb-3 md:mb-6 flex items-center justify-between custom-text-small container mx-auto px-4 md:px-12">
+        <div className="relative mt-8 md:mt-16 mb-3 md:mb-6 flex items-center justify-between custom-text-small"> {/* container mx-auto px-4 md:px-12 */}
             <div className="left-0 font-lower"> 
                 <span>
                     Copyright © 
