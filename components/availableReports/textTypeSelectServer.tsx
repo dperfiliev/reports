@@ -9,7 +9,7 @@ export default async function TextTypeSelectServer() {
 
 
     const [dataResult] = await Promise.allSettled([
-        getTextTypes({ pageSize: 300 })
+        getTextTypes({})
     ])
 
     if (dataResult.status === "rejected") {

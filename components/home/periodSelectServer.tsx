@@ -9,7 +9,7 @@ export default async function PeriodSelectServer() {
 
 
     const [dataResult] = await Promise.allSettled([
-        getPeriods({ pageSize: 300 })
+        getPeriods({})
     ])
 
     if (dataResult.status === "rejected") {

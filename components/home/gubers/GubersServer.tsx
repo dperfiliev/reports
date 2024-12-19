@@ -6,7 +6,7 @@ import GuberCard from "./guberCard"
 
 export default async function GubersServer() {
     const [dataResult] = await Promise.allSettled([
-        getGubers({ pageSize: 83 })
+        getGubers({})
     ])
 
     if (dataResult.status === "rejected") {
