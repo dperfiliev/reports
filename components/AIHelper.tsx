@@ -61,6 +61,7 @@ export default function AIHelper() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'AI-Api-Key': `${process.env.AI_API_KEY}`
                 },
                 body: JSON.stringify({ query: inputValue, recaptchaToken: token }),
             });

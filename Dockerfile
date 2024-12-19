@@ -13,6 +13,9 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Omit --production flag for TypeScript devDependencies
 RUN yarn global add pnpm
 
+# Устанавливаем хранилище для pnpm !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+RUN pnpm config set store-dir /root/.pnpm-store
+
 COPY . ./
 COPY public ./public
 COPY next.config.js .
@@ -27,6 +30,9 @@ ARG NEXT_PUBLIC_CMS_API_URL
 ENV NEXT_PUBLIC_CMS_API_URL=${NEXT_PUBLIC_CMS_API_URL}
 ARG NEXT_PUBLIC_CMS_DOMAIN
 ENV NEXT_PUBLIC_CMS_DOMAIN=${NEXT_PUBLIC_CMS_DOMAIN}
+
+ARG AI_API_KEY
+ENV AI_API_KEY=${AI_API_KEY}
 
 ARG NEXT_PUBLIC_AI_URL
 ENV NEXT_PUBLIC_AI_URL=${NEXT_PUBLIC_AI_URL}
@@ -77,6 +83,9 @@ ARG NEXT_PUBLIC_CMS_API_URL
 ENV NEXT_PUBLIC_CMS_API_URL=${NEXT_PUBLIC_CMS_API_URL}
 ARG NEXT_PUBLIC_CMS_DOMAIN
 ENV NEXT_PUBLIC_CMS_DOMAIN=${NEXT_PUBLIC_CMS_DOMAIN}
+
+ARG AI_API_KEY
+ENV AI_API_KEY=${AI_API_KEY}
 
 ARG NEXT_PUBLIC_AI_URL
 ENV NEXT_PUBLIC_AI_URL=${NEXT_PUBLIC_AI_URL}

@@ -1,4 +1,10 @@
 export async function POST(request: Request) {
+    const headerKey = request.headers.get("AI-Api-Key")
+
+    if (headerKey !== process.env.AI_API_KEY) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
     const data = await request.json();
 
     const query = data.query;
