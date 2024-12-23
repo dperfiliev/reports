@@ -6,7 +6,7 @@ import fetchData from "./fetchData"
 export default async function getPeriods() {
   const query = `
     query Periods {
-        periods {
+        periods (pagination: {limit: 20}) {
             data {
                 id
                 attributes {

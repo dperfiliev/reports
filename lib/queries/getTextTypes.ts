@@ -6,7 +6,7 @@ import fetchData from "./fetchData"
 export default async function getTextTypes() {
   const query = `
   query TextTypes {
-      textTypes {
+      textTypes (pagination: { limit: 100 }) {
           data {
               id
               attributes {

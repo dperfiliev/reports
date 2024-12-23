@@ -10,7 +10,7 @@ export default async function getGuberAndReports({
 }) {
   const query = `
   query GuberAndReports($filters: ReportFiltersInput) {
-      reports(filters: $filters) {
+      reports(filters: $filters, pagination: {limit: 100}) {
           data {
               id
               attributes {

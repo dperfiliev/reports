@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function GubersFindOut() {
     return (
         <div>
-            <Link href="/allGubers" className="mt-6 flex items-baseline cursor-pointer">
+            <Link href="/allGubers?period=1820" className="mt-6 flex items-baseline cursor-pointer">
                 <span className="text-blue font-bold custom-text-small">
                     Узнать больше
                 </span>

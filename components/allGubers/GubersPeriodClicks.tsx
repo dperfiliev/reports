@@ -17,15 +17,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
     const [, setValuePeriod] = useState(currentValuePeriod);
     const [activePeriod, setActivePeriod] = useState(currentValuePeriod || (periods?.length > 0 ? periods[0]?.attributes?.value : ""));
     //const [, startTransitionPeriod] = React.useTransition();
-
-    useEffect(() => {
-        if (!currentValuePeriod && activePeriod) {
-            const params = new URLSearchParams(window.location.search);
-            params.set(paramPeriod, activePeriod);
-            router.push(`${pathname}?${params.toString()}`, { scroll: false });
-        }
-    }, [currentValuePeriod, activePeriod, paramPeriod, pathname, router]);
-
+    
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handlePeriodClick = useCallback((periodId: string, valuePeriod: string | null) => {

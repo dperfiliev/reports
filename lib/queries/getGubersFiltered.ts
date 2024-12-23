@@ -10,7 +10,7 @@ export default async function getGubersFiltered({
 }) {
   const query = `
       query GubersFiltered($filters: GuberFiltersInput) {
-          gubers(filters: $filters) {
+          gubers(filters: $filters, pagination: {limit: 20}) {
               data {
                   id
                   attributes {

@@ -6,7 +6,7 @@ import fetchData from "./fetchData"
 export default async function getGubers() {
   const query = `
     query Gubers {
-      gubers {
+      gubers (pagination: { limit: 100 }) {
         data {
           id
           attributes {

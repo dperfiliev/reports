@@ -15,7 +15,6 @@ export default async function GubersServer() {
         }
     }
 
-
     return (
         dataResult.value.map((guber) => (
             <div key={guber?.id} className="flex justify-center flex-shrink-0 lg:basis-1/4 md:basis-1/3 basis-1/2 snap-center">

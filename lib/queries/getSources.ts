@@ -6,7 +6,7 @@ import fetchData from "./fetchData"
 export default async function getSources() {
   const query = `
   query Sources {
-      sources {
+      sources (pagination: { limit: 200 }) {
           data {
               id
               attributes {

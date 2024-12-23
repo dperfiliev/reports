@@ -14,7 +14,7 @@ export default async function getReportsFiltered({
 }) {
   const query = `
     query ReportsFiltered($filters: ReportFiltersInput) {
-        reports(filters: $filters) {
+        reports(filters: $filters, pagination: { limit: 400}) {
             data {
                 id
                 attributes {
