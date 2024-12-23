@@ -3,67 +3,59 @@
 import { notFound } from "next/navigation"
 import fetchData from "./fetchData"
 
-export default async function getGuberAndReports({ 
-    pageSize, guberId
-}: { 
-    pageSize?: number, guberId: string
+export default async function getGuberAndReports({
+  guberId
+}: {
+  guberId: string
 }) {
-    const query = `
-    query GuberAndReports($pagination: PaginationArg, $filters: ReportFiltersInput) {
-        reports(pagination: $pagination, filters: $filters) {
-          meta {
-            pagination {
-              total
-            }
-          }
+  const query = `
+  query GuberAndReports($filters: ReportFiltersInput) {
+      reports(filters: $filters) {
           data {
-            id
-            attributes {
-              title
-              description
-              pages
-              img {
-                data {
-                  attributes {
-                    url
+              id
+              attributes {
+                  title
+                  description
+                  pages
+                  img {
+                      data {
+                          attributes {
+                              url
+                          }
+                      }
                   }
-                }
-              }
-              source {
-                data {
-                  id
-                  attributes {
-                    name
+                  source {
+                      data {
+                          id
+                          attributes {
+                              name
+                          }
+                      }
                   }
-                }
+                  guber {
+                      data {
+                          id
+                      }
+                  }
               }
-              guber {
-                data {
-                  id
-                }
-              }
-            }
+          }
+      }
+  }
+`
+  const json = await fetchData<ReportsArrayT>({
+    query,
+    variables: {
+      filters: {
+        guber: {
+          id: {
+            containsi: guberId
           }
         }
       }
-    `
-    const json = await fetchData<ReportsArrayT>({
-        query,
-        variables: {
-          pagination: {
-            pageSize: pageSize
-          },
-          filters: {
-            guber: {
-              id: {
-                containsi: guberId
-              }
-            }
-          }
-        }
-    })
+    }
+  })
 
-    if (json.data.reports.meta.pagination.total === 0) notFound()
+  if (json.data.reports.data.length === 0) notFound()
 
-    return json.data.reports.data
+  return json.data.reports.data
 }

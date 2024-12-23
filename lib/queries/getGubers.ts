@@ -3,57 +3,44 @@
 import { notFound } from "next/navigation"
 import fetchData from "./fetchData"
 
-export default async function getGubers({
-  pageSize
-}: {
-  pageSize?: number
-}) {
+export default async function getGubers() {
   const query = `
-    query Gubers($pagination: PaginationArg) {
-  gubers(pagination: $pagination) {
-    meta {
-      pagination {
-        total
-      }
-    }
-    data {
-      id
-      attributes {
-        name
-        description
-        
-        img {
-          data {
-            attributes {
-              url
+    query Gubers {
+      gubers {
+        data {
+          id
+          attributes {
+            name
+            description
+            img {
+              data {
+                attributes {
+                  url
+                }
+              }
             }
+            periods {
+              data {
+                id
+                attributes {
+                  value
+                }
+              }
+            }
+            rank
+            service
           }
         }
-        periods {
-          data {
-            id
-            attributes {
-              value
-            }
-          }
-        }
-        rank
-        service
       }
     }
-  }
-}
-    `
+  `
   const json = await fetchData<GubersArrayT>({
     query,
-    variables: {
-      pagination: {
-        pageSize: pageSize
-      }
-    }
+  })
+  
+  const sortedData = json.data.gubers.data.sort((a, b) => {
+    return parseInt(a.id) - parseInt(b.id)
   })
 
-  if (json.data.gubers.meta.pagination.total === 0) notFound()
-
-  return json.data.gubers.data
+  return sortedData
 }

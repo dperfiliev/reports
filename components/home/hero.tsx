@@ -61,8 +61,9 @@ export default function Hero() {
                                 src={src}
                                 alt=""
                                 fill
-                                sizes="100vw"
+                                sizes="80vw"
                                 className="w-full h-full object-cover"
+                                priority={true} 
                             />
                         </SwiperSlide>
                     ))}

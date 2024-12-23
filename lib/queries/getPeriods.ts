@@ -3,38 +3,28 @@
 import { notFound } from "next/navigation"
 import fetchData from "./fetchData"
 
-export default async function getPeriods({ 
-    pageSize
-}: { 
-    pageSize?: number
-}) {
-    const query = `
-    query Periods($pagination: PaginationArg) {
-        periods(pagination: $pagination) {
-          data {
-            id
-            attributes {
-              value
+export default async function getPeriods() {
+  const query = `
+    query Periods {
+        periods {
+            data {
+                id
+                attributes {
+                    value
+                }
             }
-          }
-          meta {
-            pagination {
-              total
-            }
-          }
         }
-      }
-    `
-    const json = await fetchData<PeriodsArrayT>({
-        query,
-        variables: {
-          pagination: {
-            pageSize: pageSize
-          }
-        }
-    })
+    }
+  `
+  const json = await fetchData<PeriodsArrayT>({
+    query,
+  })
 
-    if (json.data.periods.meta.pagination.total === 0) notFound()
+  if (json.data.periods.data.length === 0) notFound()
 
-    return json.data.periods.data
+  const sortedData = json.data.periods.data.sort((a, b) => {
+    return parseInt(a.attributes.value) - parseInt(b.attributes.value)
+  })
+
+  return sortedData
 }

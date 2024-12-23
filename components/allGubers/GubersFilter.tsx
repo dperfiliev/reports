@@ -47,13 +47,19 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
         <div className="w-fit mb-6 block lg:hidden">
             <Select disabled={isPendingPeriod} defaultValue={currentValuePeriod} value={valuePeriod} onValueChange={handleSelect}>
                 <SelectTrigger className="w-full custom-text-button">
-                    <SelectValue placeholder='Период' />
+                    <SelectValue placeholder={currentValuePeriod ? currentValuePeriod : 'Период'} />
                 </SelectTrigger>
-                <SelectContent className="custom-text-button">
+                <SelectContent className="custom-text-button"
+                    ref={(ref) => {
+                        if (!ref) return;
+                        ref.ontouchstart = (e) => {
+                            e.preventDefault();
+                        }
+                    }}>
                     {children}
                 </SelectContent>
             </Select>
-            
+
         </div>
     )
 }

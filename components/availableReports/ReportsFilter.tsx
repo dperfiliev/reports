@@ -139,14 +139,19 @@ export function ReportsFilter({
         <Select disabled={isPendingSource} defaultValue={currentValueSource} value={valueSource} onValueChange={handleSelectSource}>
           <SelectTrigger className="w-fit custom-text-button text-left">
             <SelectValue placeholder="Источник" className="custom-text-button text-left">
-            <p>
-              Источник
-            </p>
-          
+              <p>
+                Источник
+              </p>
+
             </SelectValue>
           </SelectTrigger>
 
-          <SelectContent className="custom-text-button" classNamePrimitive="w-72">
+          <SelectContent className="custom-text-button" classNamePrimitive="w-72" ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => {
+              e.preventDefault();
+            }
+          }}>
             {childrenSource}
           </SelectContent>
         </Select>
@@ -154,13 +159,18 @@ export function ReportsFilter({
         <Select disabled={isPendingPeriod} defaultValue={currentValuePeriod} value={valuePeriod} onValueChange={handleSelectPeriod}>
           <SelectTrigger className="w-fit custom-text-button">
             <SelectValue placeholder="Период" >
-            <p>
-              Период
-            </p>
+              <p>
+                Период
+              </p>
             </SelectValue>
           </SelectTrigger>
 
-          <SelectContent className="custom-text-button">
+          <SelectContent className="custom-text-button" ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => {
+              e.preventDefault();
+            }
+          }}>
             {childrenPeriod}
           </SelectContent>
         </Select>
@@ -168,13 +178,18 @@ export function ReportsFilter({
         <Select disabled={isPendingTextType} defaultValue={currentValueTextType} value={valueTextType} onValueChange={handleSelectTextType}>
           <SelectTrigger className="w-fit custom-text-button">
             <SelectValue placeholder="Тип текста" >
-            <p>
-            Тип текста
-            </p>
+              <p>
+                Тип текста
+              </p>
             </SelectValue>
           </SelectTrigger>
 
-          <SelectContent className="custom-text-button">
+          <SelectContent className="custom-text-button" ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => {
+              e.preventDefault();
+            }
+          }}>
             {childrenTextType}
           </SelectContent>
         </Select>
@@ -196,27 +211,27 @@ export function ReportsFilter({
         </div>
 
         <div className="flex">
-        <div className={valuePeriod === undefined || valuePeriod === "" ? "hidden" : "block mt-4 mr-2"}>
-          <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
-            <p className="custom-text-small ml-2">
-              {valuePeriod}
-            </p>
-            <Button className="relative h-4" onClick={handlePeriodReset}>
-              <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
-            </Button>
+          <div className={valuePeriod === undefined || valuePeriod === "" ? "hidden" : "block mt-4 mr-2"}>
+            <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
+              <p className="custom-text-small ml-2">
+                {valuePeriod}
+              </p>
+              <Button className="relative h-4" onClick={handlePeriodReset}>
+                <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
+              </Button>
+            </div>
           </div>
-        </div>
 
-        <div className={valueTextType === undefined || valueTextType === "" ? "hidden" : "block mt-4"}>
-          <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
-            <p className="custom-text-small ml-2">
-              {valueTextType}
-            </p>
-            <Button className="relative h-4" onClick={handleTextTypeReset}>
-              <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
-            </Button>
+          <div className={valueTextType === undefined || valueTextType === "" ? "hidden" : "block mt-4"}>
+            <div className="flex items-center justify-center w-fit border border-gray-400 rounded-full py-1 px-2 hover:shadow-md transition-all">
+              <p className="custom-text-small ml-2">
+                {valueTextType}
+              </p>
+              <Button className="relative h-4" onClick={handleTextTypeReset}>
+                <Image src="/images/cancel.svg" alt="" fill sizes="10vw" className="opacity-60" />
+              </Button>
+            </div>
           </div>
-        </div>
         </div>
 
       </div>

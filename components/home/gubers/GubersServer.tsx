@@ -2,11 +2,9 @@ import getGubers from "@/lib/queries/getGubers"
 
 import GuberCard from "./guberCard"
 
-
-
 export default async function GubersServer() {
     const [dataResult] = await Promise.allSettled([
-        getGubers({})
+        getGubers()
     ])
 
     if (dataResult.status === "rejected") {

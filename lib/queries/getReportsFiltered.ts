@@ -3,95 +3,86 @@
 import { notFound } from "next/navigation"
 import fetchData from "./fetchData"
 
-export default async function getReportsFiltered({ 
-    pageSize, 
-    source, 
-    period, 
-    textType
-}: { 
-    pageSize?: number, 
-    source?:string, 
-    period?:string, 
-    textType?:string
+export default async function getReportsFiltered({
+  source,
+  period,
+  textType
+}: {
+  source?: string,
+  period?: string,
+  textType?: string
 }) {
-    const query = `
-    query ReportsFilterted($pagination: PaginationArg, $filters: ReportFiltersInput) {
-      reports(pagination: $pagination, filters: $filters) {
-        meta {
-          pagination {
-            total
-          }
+  const query = `
+    query ReportsFiltered($filters: ReportFiltersInput) {
+        reports(filters: $filters) {
+            data {
+                id
+                attributes {
+                    title
+                    description
+                    img {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                    periods {
+                        data {
+                            id
+                            attributes {
+                                value
+                            }
+                        }
+                    }
+                    text_type {
+                        data {
+                            id
+                            attributes {
+                                name
+                            }
+                        }
+                    }
+                    source {
+                        data {
+                            id
+                            attributes {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
         }
-        data {
-          id
-          attributes {
-            title
-            description
-            img {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            periods {
-              data {
-                id
-                attributes {
-                  value
-                }
-              }
-            }
-            text_type {
-              data {
-                id
-                attributes {
-                  name
-                }
-              }
-            }
-            source {
-              data {
-                id
-                attributes {
-                  name
-                }
-              }
-            }
+    }
+  `
+
+  const json = await fetchData<ReportsArrayT>({
+    query,
+    variables: {
+      filters: {
+        source: {
+          name: {
+            contains: source
+          }
+        },
+        periods: {
+          value: {
+            contains: period
+          }
+        },
+        text_type: {
+          name: {
+            contains: textType
           }
         }
       }
     }
-    `
-    const json = await fetchData<ReportsArrayT>({
-        query,
-        variables: {
-          pagination: {
-            pageSize: pageSize
-          },
-          filters: {
-            source: {
-              name: {
-                contains: source
-              }
-            },
-            periods: {
-              value: {
-                contains: period
-              }
-            },
-            text_type: {
-              name: {
-                contains: textType
-              }
-            }
-          }
-        }
-    })
+  })
 
-    // await new Promise((resolve) => setTimeout(resolve, 2000))
+  // await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    if (json.data.reports.meta.pagination.total === 0) notFound()
+  if (json.data.reports.data.length === 0) notFound()
 
-    return json.data.reports.data
+  return json.data.reports.data
 }

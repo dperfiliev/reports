@@ -5,10 +5,9 @@ export default async function GubersServer({ searchParams }: {searchParams: { [k
 
     
     const period = searchParams["period"] as string | undefined
-    const startsWith = searchParams["StartsWith"] as string | undefined
     
     const [dataResult] = await Promise.allSettled([
-        getGubersFiltered({ period: period, startsWith: startsWith })
+        getGubersFiltered({ period: period })
     ])
 
     if (dataResult.status === "rejected") {

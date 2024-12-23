@@ -4,7 +4,7 @@ import GubersPeriodClicks from "./GubersPeriodClicks"
 
 export default async function PeriodScrollServer() {
     const [dataResult] = await Promise.allSettled([
-        getPeriods({})
+        getPeriods()
     ])
 
     if (dataResult.status === "rejected") {
