@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const jsonRes = await res.json();
 
     if (!jsonRes.success) {
-        return new Response(JSON.stringify({ error: 'reCAPTCHA verification failed' }), { status: 400 });
+        return new Response(JSON.stringify({ error: 'Проверка reCAPTCHA не удалась' }), { status: 400 });
     }
 
     try {

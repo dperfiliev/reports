@@ -132,6 +132,36 @@
 }
   */
 
+.swiper-pagination-bullet {
+  @apply w-2 h-2 md:w-3 md:h-3 bg-white opacity-100 mx-2 md:mx-3 !important; /* Размер и цвет */
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-blue !important; /* Цвет активного индикатора */
+}
+
+.swiper-next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30%;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.swiper-prev{
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  z-index: 1;
+  background-color: transparent;
+}
+
 @keyframes typing {
   0% { opacity: 0; }
   50% { opacity: 1; }

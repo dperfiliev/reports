@@ -13,7 +13,7 @@ export default async function AvailableReportsBuilder({
     const textType = searchParams["textType"] as string | undefined
 
     const [dataResult] = await Promise.allSettled([
-        getReportsFiltered({  pageSize: 300, source, period, textType })
+        getReportsFiltered({source, period, textType })
     ])
 
     if (dataResult.status === "rejected") {

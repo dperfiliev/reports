@@ -8,8 +8,9 @@ import AIHelper from "@/components/AIHelper";
 import Footer from "@/components/footer";
 import BgFixed from "@/components/bgfixed";
 
-
 import CustomFont from 'next/font/local'
+
+import LayoutScroll from "./layout-scroll";
 
 const Involve = CustomFont({
   src: "../public/fonts/Involve-Regular.ttf",
@@ -51,22 +52,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="ru" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/images/icons/favicon-darkTheme.ico" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/images/icons/favicon-lightTheme.ico" media="(prefers-color-scheme: light)" />
         <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=4" sizes="<generated>" />
       </head>
-      <body className={`${Involve.variable} ${DejaVu.variable} scroll-smooth flex flex-col items-start overflow-x-hidden bg-back`}>
+      <body className={`${Involve.variable} ${DejaVu.variable} flex flex-col items-start overflow-x-hidden bg-back`}>
         {/*
         <BgFixed />
         */}
         <Header />
 
-        <div className="relative container flex flex-col justify-between mx-auto px-4 md:px-12 min-h-screen md:shadow-neutral-300 md:shadow-md bg-white">
+        <LayoutScroll> 
           {children}
           <Footer />
-        </div>
+        </LayoutScroll>
+
         <AIHelper />
       </body>
     </html>

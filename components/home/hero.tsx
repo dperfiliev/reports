@@ -4,6 +4,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image"
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { EffectFade } from "swiper/modules";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import "swiper/css/effect-fade"; // Стили для эффекта исчезновения
 
 export default function Hero() {
 
@@ -12,29 +20,6 @@ export default function Hero() {
         "/images/hero_2.jpg",
         "/images/hero_3.jpg",
     ];
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000); // Автопролистывание каждые 3 секунды
-
-        return () => clearInterval(interval);
-    }, [images.length]);
-
-    const handleIndicatorClick = (index: number) => {
-        setCurrentIndex(index);
-    };
-
-    const handlePrevClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
-    const handleNextClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
-
 
     return (
         <div className="h-full w-full mt-8 md:mt-16">
@@ -51,7 +36,49 @@ export default function Hero() {
                 </p>
             </div>
             <div className="relative w-full h-44 sm:h-80 md:h-[350px]">
-                <button
+
+                <Swiper
+                    modules={[Navigation, Pagination, Autoplay, EffectFade]}
+                    slidesPerView={1}
+                   
+                    effect="fade" 
+                    fadeEffect={{ crossFade: true }} 
+                    
+                    pagination={{ clickable: true, bulletClass: 'swiper-pagination-bullet', bulletActiveClass: 'swiper-pagination-bullet-active', }}
+                    navigation={{
+                        nextEl: '.swiper-next',
+                        prevEl: '.swiper-prev',
+                    }}
+
+                    autoplay={{ delay: 5000 }}
+                    speed={1000}
+                    loop={true}
+                    className="rounded-xl w-full h-full"
+                >
+                    {images.map((src, index) => (
+                        <SwiperSlide key={index}>
+                            <Image
+                                src={src}
+                                alt=""
+                                fill
+                                sizes="100vw"
+                                className="w-full h-full object-cover"
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+
+                <div className="swiper-prev hidden md:block"></div>
+                <div className="swiper-next hidden md:block"></div>
+
+            </div>
+        </div>
+    )
+}
+
+/*
+
+ <button
                     className="absolute left-0 top-0 h-full w-1/2 bg-transparent z-10"
                     onClick={handlePrevClick}
 
@@ -85,8 +112,4 @@ export default function Hero() {
                 </div>
 
 
-
-            </div>
-        </div>
-    )
-}
+*/
