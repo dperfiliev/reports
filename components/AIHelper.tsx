@@ -25,7 +25,7 @@ export default function AIHelper() {
     const [showReCAPTCHA, setShowReCAPTCHA] = useState(true);
 
     const [messages, setMessages] = useState<Message[]>([
-        { sender: 'bot', text: 'Здравствуйте! Задавайте вопросы — с радостью отвечу!', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
+        { sender: 'bot', text: 'Здравствуйте! Задавайте вопросы, с радостью отвечу!', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
     ]);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -81,7 +81,7 @@ export default function AIHelper() {
             });
 
             if (!response.ok) {
-                throw new Error('Ошибка при получении ответа от сервера');
+                throw new Error('Ошибка при получении ответа сервера');
             }
 
             const data = await response.json();
@@ -91,7 +91,7 @@ export default function AIHelper() {
             if (data.output_text) {
                 setMessages(prevMessages => [...prevMessages, { sender: 'bot', text: data.output_text, timestamp: botTime }]);
             } else {
-                setMessages(prevMessages => [...prevMessages, { sender: 'bot', text: 'К сожалению, в данный момент я не могу ответить :c', timestamp: botTime }]);
+                setMessages(prevMessages => [...prevMessages, { sender: 'bot', text: 'Извините, но сейчас я не могу ответить. Попробуйте снова через некоторое время.', timestamp: botTime }]);
             }
 
             const Date = currentDate.toLocaleDateString();
@@ -194,7 +194,7 @@ export default function AIHelper() {
                     <div className='h-max flex flex-col flex-grow rounded-2xl bg-white shadow-[inset_0_0px_2px_#A3A3A3] p-2 md:p-4 overflow-y-auto overflow-x-hidden custom-scrollbar custom-text-small'>
 
                         {messages.map((message, index) => (
-                            <div key={index} className={`inline-flex flex-col h-max max-w-[60%] rounded-2xl p-2 md:p-4 mb-2 text-white ${message.sender === 'user' ? 'bg-pdf-reader self-end text-end' : 'bg-blue self-start'}`}>
+                            <div key={index} className={`inline-flex flex-col h-max max-w-[90%] rounded-2xl p-2 md:p-4 mb-2 text-white ${message.sender === 'user' ? 'bg-pdf-reader self-end text-end' : 'bg-blue self-start'}`}>
 
                                 <p>
                                     {message.text}
