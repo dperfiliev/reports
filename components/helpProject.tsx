@@ -10,7 +10,7 @@ export default function HelpProject() {
                         <h1 className="font-bold font-upper text-base sm:text-lg md:text-xl lg:text-2xl">
                             ПОМОЧЬ ПРОЕКТУ
                         </h1>
-                        <p className="py-4 custom-text-norm">
+                        <p className="py-4 custom-text-small">
                             Работа по распознанию — многоэтапная и медленная. Один человек потратил бы на неё всю жизнь.
                             Проект нуждается в большой команде волонтёров, которые смогут расшифровать рукопись в первом приближении.
                         </p>
@@ -24,7 +24,7 @@ export default function HelpProject() {
                     </Link>
                 </div>
             </div>
-            <div className="relative w-full h-64 sm:h-52 md:h-60 z-0 overflow-hidden rounded-xl">
+            <div className="relative w-full h-48 md:h-52 z-0 overflow-hidden rounded-xl">
                 <Image src="/images/bg-help.jpg" alt="" fill sizes="100vw" className="object-cover object-[0%_40%] scale-150 opacity-20" />
             </div>
         </div>
