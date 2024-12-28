@@ -214,7 +214,7 @@ export default function AIHelper() {
 
                     <div className='h-12 w-full flex'>
                         <input id='query' className='w-full shadow-[inset_0_0px_2px_#A3A3A3] mr-2 md:mr-4 rounded-2xl p-2 md:p-4 resize-none overflow-y-auto custom-scrollbar focus:outline-none custom-text-small'
-                            placeholder="Введите запрос..."
+                            placeholder="Введите ваш вопрос здесь..."
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}

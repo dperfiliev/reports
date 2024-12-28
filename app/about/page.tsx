@@ -1,5 +1,6 @@
 import HelpProject from "@/components/helpProject"
 import { AboutBreadcrumb } from "@/components/aboutBreadcrumb"
+import Feedback from "./feedback";
 
 import type { Metadata } from "next";
 
@@ -32,6 +33,10 @@ export default function About() {
                 </div>
 
                 <HelpProject />
+
+                {/*
+                    <Feedback />
+                */}
 
             </div>
         </div>
