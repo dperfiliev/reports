@@ -23,10 +23,12 @@ export default function AllGubers({ searchParams }: { searchParams: { [key: stri
             </h1>
             <div className="mt-6 md:mt-8 lg:flex">
                 <Suspense>
+                    {/* Mobile */}
                     <GubersFilter paramPeriod="period">
                         <PeriodSelectServer />
                     </GubersFilter>
 
+                    {/* Desktop */}
                     <PeriodScrollServer />
                     
                 </Suspense>

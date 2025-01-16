@@ -15,13 +15,29 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
 
     const currentValuePeriod = searchParams.get(paramPeriod) ?? "";
     const [, setValuePeriod] = useState(currentValuePeriod);
-    const [activePeriod, setActivePeriod] = useState(currentValuePeriod || (periods?.length > 0 ? periods[0]?.attributes?.value : ""));
+    const [activePeriod, setActivePeriod] = useState(currentValuePeriod || "Все");
     //const [, startTransitionPeriod] = React.useTransition();
     
     const containerRef = useRef<HTMLDivElement>(null);
 
+    const periodsWithAll = [{ id: "all", attributes: { value: "Все" } }, ...periods];
+
     const handlePeriodClick = useCallback((periodId: string, valuePeriod: string | null) => {
         setActivePeriod(valuePeriod ?? "");
+
+        if (valuePeriod === "Все") {
+            setActivePeriod("Все");
+            setValuePeriod("");
+            const params = new URLSearchParams(window.location.search);
+            params.delete(paramPeriod);
+            router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+            if (containerRef.current) {
+                containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            
+            return;
+        }
 
         if (valuePeriod && valuePeriod?.length > 0) {
             setValuePeriod(valuePeriod);
@@ -33,6 +49,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
         // Прокрутка контейнера к выбранному элементу
         if (containerRef.current) {
             const selectedElement = containerRef.current.querySelector(`[data-id="${periodId}"]`) as HTMLElement;
+
             if (selectedElement) {
                 const topPos = selectedElement.offsetTop - containerRef.current.offsetTop;
                 containerRef.current.scrollTo({ top: topPos, behavior: 'smooth' });
@@ -51,17 +68,18 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
     }, [activePeriod]);
 
     const handleScrollUp = () => {
-        const currentIndex = periods.findIndex(period => period.attributes?.value === activePeriod);
+        const currentIndex = periodsWithAll.findIndex(period => period.attributes?.value === activePeriod);
+        if (currentIndex === 0) return;
         if (currentIndex > 0) {
-            const prevPeriod = periods[currentIndex - 1];
+            const prevPeriod = periodsWithAll[currentIndex - 1];
             handlePeriodClick(prevPeriod.id, prevPeriod.attributes?.value);
         }
     };
 
     const handleScrollDown = () => {
-        const currentIndex = periods.findIndex(period => period.attributes?.value === activePeriod);
-        if (currentIndex < periods.length - 1) {
-            const nextPeriod = periods[currentIndex + 1];
+        const currentIndex = periodsWithAll.findIndex(period => period.attributes?.value === activePeriod);
+        if (currentIndex < periodsWithAll.length - 1) {
+            const nextPeriod =  periodsWithAll[currentIndex + 1];
             handlePeriodClick(nextPeriod.id, nextPeriod.attributes?.value);
         }
     };
@@ -76,7 +94,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
 
             <div ref={containerRef} className="h-48 overflow-y-auto scroll-invisible">
                 <div className="flex flex-col items-center gap-3 custom-text-norm">
-                    {periods.map((period) => (
+                    {periodsWithAll.map((period) => (
                         <div
                             key={period?.id}
                             data-id={period?.id}

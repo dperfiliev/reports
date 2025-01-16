@@ -20,11 +20,16 @@ export default async function PeriodSelectServer() {
         }
     }
 
+    const periodsWithAllOption = [
+        { id: 'all', attributes: { value: "Все" } }, 
+        ...dataResult.value
+    ];
+
     return (
         <div>
             <SelectGroup>
                 {
-                    dataResult.value.map((item) => (
+                    periodsWithAllOption.map((item) => (
                         <SelectItem className=""
                             key={item?.id} value={item.attributes?.value}>{item.attributes?.value}</SelectItem>
                     ))

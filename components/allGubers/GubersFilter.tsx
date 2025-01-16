@@ -12,6 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { SelectItem } from "@radix-ui/react-select";
 
 
 export default function GubersFilter({ children, paramPeriod }: { children: React.ReactNode, paramPeriod: string }) {
@@ -20,7 +21,7 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
     const pathname = usePathname()
     const searchParams = useSearchParams()
 
-    const currentValuePeriod = searchParams.get(paramPeriod) ?? undefined
+    const currentValuePeriod = searchParams.get(paramPeriod) ?? "Все";
 
     const [valuePeriod, setValuePeriod] = useState(currentValuePeriod);
 
@@ -30,7 +31,12 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
     const handleSelect = React.useCallback((valuePeriod: string | null) => {
         const params = new URLSearchParams(window.location.search)
 
-        if ((valuePeriod !== null) && (valuePeriod?.length > 0)) {
+        if (valuePeriod === "Все") {
+            setValuePeriod("Все");
+            params.delete(paramPeriod);
+        }
+
+        else if ((valuePeriod !== null) && (valuePeriod?.length > 0)) {
             setValuePeriod(valuePeriod)
             params.set(paramPeriod, valuePeriod)
         } else {
@@ -45,9 +51,9 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
 
     return (
         <div className="w-fit mb-6 block lg:hidden">
-            <Select disabled={isPendingPeriod} defaultValue={currentValuePeriod} value={valuePeriod} onValueChange={handleSelect}>
+            <Select disabled={isPendingPeriod} value={valuePeriod} onValueChange={handleSelect}>
                 <SelectTrigger className="w-full custom-text-button">
-                    <SelectValue placeholder='Период' />
+                    <SelectValue placeholder="Период"/>
                 </SelectTrigger>
                 <SelectContent className="custom-text-button"
                     ref={(ref) => {
