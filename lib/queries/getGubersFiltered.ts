@@ -10,7 +10,7 @@ export default async function getGubersFiltered({
 }) {
   const query = `
       query GubersFiltered($filters: GuberFiltersInput) {
-          gubers(filters: $filters, pagination: {limit: 20}) {
+          gubers(filters: $filters, pagination: {limit: 30}) {
               data {
                   id
                   attributes {
@@ -40,20 +40,33 @@ export default async function getGubersFiltered({
       }
     `
 
+  const variables: { filters?: any } = period
+    ? { filters: { periods: { value: { contains: period } } } }
+    : {}
+
   const json = await fetchData<GubersArrayT>({
     query,
-    variables: {
-      filters: {
-        periods: {
-          value: {
-            contains: period
-          }
-        }
-      }
-    }
+    variables,
   })
 
   if (json.data.gubers.data.length === 0) notFound()
 
-  return json.data.gubers.data
+  const data = json.data.gubers.data
+
+  if (!period) {
+    data.sort((a, b) => {
+      const periodA = a.attributes.periods?.data[0]?.attributes.value
+      const periodB = b.attributes.periods?.data[0]?.attributes.value
+
+      if (periodA && periodB) {
+        const periodDiff = parseInt(periodA) - parseInt(periodB)
+        if (periodDiff !== 0) {
+          return periodDiff
+        }
+      }
+      return parseInt(a.id) - parseInt(b.id)
+    })
+  }
+
+  return data
 }
