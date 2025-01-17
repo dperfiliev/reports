@@ -53,20 +53,18 @@ export default async function getGubersFiltered({
 
   const data = json.data.gubers.data
 
-  if (!period) {
-    data.sort((a, b) => {
-      const periodA = a.attributes.periods?.data[0]?.attributes.value
-      const periodB = b.attributes.periods?.data[0]?.attributes.value
+  data.sort((a, b) => {
+    const periodA = a.attributes.periods?.data[0]?.attributes.value
+    const periodB = b.attributes.periods?.data[0]?.attributes.value
 
-      if (periodA && periodB) {
-        const periodDiff = parseInt(periodA) - parseInt(periodB)
-        if (periodDiff !== 0) {
-          return periodDiff
-        }
+    if (periodA && periodB) {
+      const periodDiff = parseInt(periodA) - parseInt(periodB)
+      if (periodDiff !== 0) {
+        return periodDiff
       }
-      return parseInt(a.id) - parseInt(b.id)
-    })
-  }
+    }
+    return parseInt(a.id) - parseInt(b.id)
+  })
 
   return data
 }
