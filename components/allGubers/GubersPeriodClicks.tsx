@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useCallback, useState, useEffect } from "react";
+import React, { useRef, useCallback, useState, useEffect, useMemo } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -14,62 +14,61 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
     const searchParams = useSearchParams();
 
     const currentValuePeriod = searchParams.get(paramPeriod) ?? "";
-    const [, setValuePeriod] = useState(currentValuePeriod);
+
     const [activePeriod, setActivePeriod] = useState(currentValuePeriod || "Все");
-    //const [, startTransitionPeriod] = React.useTransition();
-    
+
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const periodsWithAll = [{ id: "all", attributes: { value: "Все" } }, ...periods];
-
-    const handlePeriodClick = useCallback((periodId: string, valuePeriod: string | null) => {
-        setActivePeriod(valuePeriod ?? "");
-
-        if (valuePeriod === "Все") {
-            setActivePeriod("Все");
-            setValuePeriod("");
-            const params = new URLSearchParams(window.location.search);
-            params.delete(paramPeriod);
-            router.push(`${pathname}?${params.toString()}`, { scroll: false });
-
-            if (containerRef.current) {
-                containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-            }
-            
-            return;
-        }
-
-        if (valuePeriod && valuePeriod?.length > 0) {
-            setValuePeriod(valuePeriod);
-            const params = new URLSearchParams(window.location.search);
-            params.set(paramPeriod, valuePeriod);
-            router.push(`${pathname}?${params.toString()}`, { scroll: false });
-        }
-
-        // Прокрутка контейнера к выбранному элементу
-        if (containerRef.current) {
-            const selectedElement = containerRef.current.querySelector(`[data-id="${periodId}"]`) as HTMLElement;
-
-            if (selectedElement) {
-                const topPos = selectedElement.offsetTop - containerRef.current.offsetTop;
-                containerRef.current.scrollTo({ top: topPos, behavior: 'smooth' });
-            }
-        }
-    }, [paramPeriod, pathname, router]);
+    const periodsWithAll = useMemo(() => [{ id: "all", attributes: { value: "Все" } }, ...periods], [periods]);
 
     useEffect(() => {
-        if (containerRef.current) {
-            const selectedElement = containerRef.current.querySelector(`[data-id="${activePeriod}"]`) as HTMLElement;
-            if (selectedElement) {
-                const topPos = selectedElement.offsetTop - containerRef.current.offsetTop;
-                containerRef.current.scrollTo({ top: topPos, behavior: 'smooth' });
+        const currentContainer = containerRef.current;
+        if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
+            const savedScrollTop = localStorage.getItem("scrollTop");
+            if (currentContainer && savedScrollTop) {
+                currentContainer.scrollTop = parseInt(savedScrollTop, 10);
             }
+
+            const handleScroll = () => {
+                if (currentContainer) {
+                    localStorage.setItem("scrollTop", currentContainer.scrollTop.toString());
+                }
+            };
+
+            currentContainer?.addEventListener("scroll", handleScroll);
+            return () => currentContainer?.removeEventListener("scroll", handleScroll);
         }
-    }, [activePeriod]);
+    }, []);
+
+    useEffect(() => {
+        const periodFromParams = searchParams.get(paramPeriod);
+        setActivePeriod(periodFromParams || "Все");
+        router.refresh()
+
+    }, [pathname, searchParams, paramPeriod]);
+
+    const handlePeriodClick = useCallback((periodId: string, valuePeriod: string | null) => {
+        setActivePeriod(valuePeriod || "Все");
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (valuePeriod === "Все") {
+            params.delete(paramPeriod);
+        } else if (valuePeriod) {
+            params.set(paramPeriod, valuePeriod);
+        }
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+        //router.refresh()
+
+        if (containerRef.current) {
+            const selectedElement = containerRef.current.querySelector(`[data-id="${periodId}"]`) as HTMLElement;
+            selectedElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+    }, [paramPeriod, pathname, router]);
 
     const handleScrollUp = () => {
         const currentIndex = periodsWithAll.findIndex(period => period.attributes?.value === activePeriod);
-        if (currentIndex === 0) return;
         if (currentIndex > 0) {
             const prevPeriod = periodsWithAll[currentIndex - 1];
             handlePeriodClick(prevPeriod.id, prevPeriod.attributes?.value);
@@ -79,17 +78,23 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
     const handleScrollDown = () => {
         const currentIndex = periodsWithAll.findIndex(period => period.attributes?.value === activePeriod);
         if (currentIndex < periodsWithAll.length - 1) {
-            const nextPeriod =  periodsWithAll[currentIndex + 1];
+            const nextPeriod = periodsWithAll[currentIndex + 1];
             handlePeriodClick(nextPeriod.id, nextPeriod.attributes?.value);
         }
     };
+
+    useEffect(() => {
+        if (activePeriod === "Все" && containerRef.current) {
+            containerRef.current.scrollTop = 0;
+        }
+    }, [activePeriod]);
 
     return (
         <div className="hidden lg:flex flex-col gap-2 items-center mr-8">
             <button onClick={handleScrollUp} className="relative w-3 h-3">
 
                 <Image src='/images/arrow-scroll.svg' alt="" fill sizes='10vw' />
-                
+
             </button>
 
             <div ref={containerRef} className="h-48 overflow-y-auto scroll-invisible">
@@ -99,7 +104,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
                             key={period?.id}
                             data-id={period?.id}
                             onClick={() => handlePeriodClick(period?.id, period?.attributes?.value)}
-                            className={`cursor-pointer ${activePeriod === period.attributes?.value ? 'text-blue font-bold' : ''}`} 
+                            className={`cursor-pointer ${activePeriod === period.attributes?.value ? 'text-blue font-bold' : ''}`}
                         >
                             <p>
                                 {period.attributes?.value}
@@ -110,8 +115,7 @@ export default function GubersPeriodClicks({ periods, paramPeriod }: PeriodScrol
             </div>
 
             <button onClick={handleScrollDown} className="relative w-3 h-3">
-              
-                <Image src='/images/arrow-scroll.svg' alt="" fill sizes='10vw' className="rotate-180"/>
+                <Image src='/images/arrow-scroll.svg' alt="" fill sizes='10vw' className="rotate-180" />
             </button>
         </div>
     );

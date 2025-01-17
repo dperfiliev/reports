@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
@@ -27,6 +27,9 @@ export default function GubersFilter({ children, paramPeriod }: { children: Reac
 
     const [isPendingPeriod, startTransitionPeriod] = React.useTransition()
 
+    useEffect(() => {
+        setValuePeriod(currentValuePeriod);
+    }, [currentValuePeriod]);
 
     const handleSelect = React.useCallback((valuePeriod: string | null) => {
         const params = new URLSearchParams(window.location.search)

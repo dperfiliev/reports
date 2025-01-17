@@ -35,7 +35,9 @@ export default function About() {
                 <HelpProject />
 
                 
-                <Feedback />
+                {/*
+                    <Feedback />
+                */}
                 
 
             </div>
